@@ -15,5 +15,11 @@
     "password": "1234567",
     "role": "Admin Media",
     "id": "1768059906773"
+  },
+  {
+    "email": "yuyun@gmail.com",
+    "password": "123",
+    "role": "Admin Bahasa",
+    "id": "1768059926380"
   }
 ]
