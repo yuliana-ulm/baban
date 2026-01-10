@@ -1,3 +1,14 @@
 [
-  { "id": "1", "email": "admin@gmail.com", "password": "1357924", "role": "Admin Utama" }
+  {
+    "id": "1",
+    "email": "admin@gmail.com",
+    "password": "1357924",
+    "role": "Admin Utama"
+  },
+  {
+    "email": "dosen@gmail.com",
+    "password": "1234567890",
+    "role": "Admin Bahasa",
+    "id": "1768059090369"
+  }
 ]
