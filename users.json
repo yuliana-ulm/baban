@@ -9,5 +9,11 @@
     "email": "dosen@gmail.com",
     "password": "1234567890",
     "role": "Admin Media"
+  },
+  {
+    "email": "yulia@gmail.com",
+    "password": "1234567",
+    "role": "Admin Media",
+    "id": "1768059906773"
   }
 ]
