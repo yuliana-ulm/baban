@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": "1768089230725",
+    "nama_pengirim": "yuyun@gmail.com",
+    "tanggal": "2026-01-10T23:53:50.725Z",
+    "status": "Pending",
+    "saran_kata": null,
+    "saran_dialek": "kucuy",
+    "detail_lengkap": {
+      "indonesia": "kucuy",
+      "keterangan": "",
+      "hulu": "",
+      "audiohulu": "",
+      "kuala": "",
+      "audiokuala": ""
+    }
+  }
+]
