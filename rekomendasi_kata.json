@@ -23,5 +23,30 @@
       ],
       "turunan": []
     }
+  },
+  {
+    "id": "1768089200429",
+    "nama_pengirim": "yuyun@gmail.com",
+    "tanggal": "2026-01-10T23:53:20.429Z",
+    "status": "Pending",
+    "saran_kata": "yuleee",
+    "saran_dialek": null,
+    "detail_lengkap": {
+      "kata": "yuleee",
+      "sukukata": "qq",
+      "definisi_umum": [
+        {
+          "definisi": "",
+          "kelaskata": "",
+          "contoh": [
+            {
+              "banjar": "",
+              "indonesia": ""
+            }
+          ]
+        }
+      ],
+      "turunan": []
+    }
   }
 ]
