@@ -39,8 +39,12 @@
     "definisi_umum": [
       {
         "definisi": "ayah, bapak",
+        "kelaskata": "Nomina",
         "contoh": [
-          {}
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
         ]
       }
     ],
