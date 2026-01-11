@@ -25,3 +25,20 @@
     ]
   }
 ]
+[
+  {
+    "judul": "Cara Membuat Wadai",
+    "langkah_langkah": [
+      {
+        "judul_poin": "Siapkan Bahan",
+        "foto_url": "https://...",
+        "isi_penjelasan": "Siapkan tepung..."
+      },
+      {
+        "judul_poin": "Aduk Adonan",
+        "foto_url": "https://...",
+        "isi_penjelasan": "Aduk sampai rata..."
+      }
+    ]
+  }
+]
