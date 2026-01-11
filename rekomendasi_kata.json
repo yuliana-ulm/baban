@@ -48,5 +48,47 @@
       ],
       "turunan": []
     }
+  },
+  {
+    "id": "1768173337262",
+    "nama_pengirim": "yuyun@gmail.com",
+    "tanggal": "2026-01-11T23:15:37.262Z",
+    "status": "Pending",
+    "saran_kata": "pian",
+    "saran_dialek": null,
+    "detail_lengkap": {
+      "kata": "pian",
+      "sukukata": "pi.an",
+      "definisi_umum": [
+        {
+          "definisi": "pron  Anda (sapaan  untuk orang yang  lebih tua atau orang  yang dihormati):",
+          "kelaskata": "",
+          "contoh": [
+            {
+              "banjar": "pian mancari siapa?",
+              "indonesia": "Anda mencari siapa? "
+            }
+          ]
+        }
+      ],
+      "turunan": [
+        {
+          "kata": "bapian",
+          "sukukata": "",
+          "definisi_umum": [
+            {
+              "definisi": " menyapa  dengan sebutan pian",
+              "kelaskata": "",
+              "contoh": [
+                {
+                  "banjar": "",
+                  "indonesia": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   }
 ]
