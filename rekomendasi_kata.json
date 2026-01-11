@@ -90,5 +90,30 @@
         }
       ]
     }
+  },
+  {
+    "id": "1768173372354",
+    "nama_pengirim": "yuyun@gmail.com",
+    "tanggal": "2026-01-11T23:16:12.354Z",
+    "status": "Pending",
+    "saran_kata": "tarabang",
+    "saran_dialek": null,
+    "detail_lengkap": {
+      "kata": "tarabang",
+      "sukukata": "ta.ra.bang",
+      "definisi_umum": [
+        {
+          "definisi": "terbang",
+          "kelaskata": "",
+          "contoh": [
+            {
+              "banjar": "",
+              "indonesia": ""
+            }
+          ]
+        }
+      ],
+      "turunan": []
+    }
   }
 ]
