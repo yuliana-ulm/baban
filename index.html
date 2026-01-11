@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel Kamus Baban By Yuliana</title>
+    <title>Admin Panel Kamus GitHub Baban By Yuliana</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <style>
         .custom-scroll::-webkit-scrollbar { height: 4px; }
@@ -19,35 +18,35 @@
 
     <div id="loginSection" class="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg mt-20">
         <div class="text-center mb-6">
-            <h2 class="text-2xl font-bold text-green-700">Login Admin Kamus</h2>
-            <p class="text-sm text-gray-500">Masuk sesuai role anda</p>
+            <h2 class="text-2xl font-bold text-gray-800"><i class="fab fa-github"></i> Admin Panel</h2>
+            <p class="text-sm text-gray-500">Mode Penyimpanan: GitHub JSON</p>
         </div>
         <div class="space-y-4">
             <input type="email" id="loginEmail" placeholder="Email" class="w-full border p-3 rounded-lg">
             <input type="password" id="loginPassword" placeholder="Password" class="w-full border p-3 rounded-lg">
-            <button onclick="handleLogin()" id="btnLogin" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold">MASUK</button>
+            <button onclick="handleLogin()" id="btnLogin" class="w-full bg-gray-800 text-white py-3 rounded-lg font-bold hover:bg-gray-900 transition">MASUK</button>
         </div>
     </div>
 
     <div id="adminContent" class="hidden max-w-6xl mx-auto bg-white p-4 md:p-8 rounded-xl shadow-lg">
         <div class="flex justify-between items-center mb-6 border-b pb-4">
             <div>
-                <h1 class="text-xl md:text-2xl font-bold text-green-700">Dashboard Admin</h1>
+                <h1 class="text-xl md:text-2xl font-bold text-gray-800">Dashboard Admin</h1>
                 <div class="flex items-center gap-2 mt-1">
                     <span id="userEmailBadge" class="text-xs text-gray-500"></span>
                     <span id="roleBadge" class="text-[10px] font-bold uppercase tracking-widest text-white bg-green-600 px-2 py-1 rounded"></span>
                 </div>
             </div>
-            <button onclick="handleLogout()" class="text-red-500 font-bold text-sm border border-red-200 px-4 py-2 rounded hover:bg-red-50">Keluar</button>
+            <button onclick="handleLogout()" class="text-red-500 font-bold text-sm border border-red-200 px-4 py-2 rounded hover:bg-red-50 transition">Keluar</button>
         </div>
 
         <div class="flex overflow-x-auto pb-2 gap-2 md:gap-3 mb-6 justify-start no-scrollbar" id="navTabs">
-            <button onclick="switchTab('users')" id="tab-users" class="hidden tab-btn whitespace-nowrap bg-gray-800 text-white px-5 py-2 rounded shadow text-sm font-bold">👤 User</button>
+            <button onclick="switchTab('users')" id="tab-users" class="hidden tab-btn whitespace-nowrap bg-gray-200 text-gray-700 px-5 py-2 rounded shadow text-sm font-bold">👤 User</button>
             <button onclick="switchTab('dialek')" id="tab-dialek" class="hidden tab-btn whitespace-nowrap bg-gray-200 text-gray-700 px-5 py-2 rounded shadow text-sm">🗣️ Dialek</button>
-            <button onclick="switchTab('kamus_banjar_indonesia')" id="tab-kamus_banjar_indonesia" class="hidden tab-btn whitespace-nowrap bg-gray-200 text-gray-700 px-5 py-2 rounded shadow text-sm">📖 Kamus</button>
+            <button onclick="switchTab('kamus_data')" id="tab-kamus_data" class="hidden tab-btn whitespace-nowrap bg-gray-200 text-gray-700 px-5 py-2 rounded shadow text-sm">📖 Kamus</button>
             <button onclick="switchTab('panduan')" id="tab-panduan" class="hidden tab-btn whitespace-nowrap bg-gray-200 text-gray-700 px-5 py-2 rounded shadow text-sm">📘 Panduan</button>
             <button onclick="switchTab('statistik')" id="tab-statistik" class="hidden tab-btn whitespace-nowrap bg-gray-200 text-gray-700 px-5 py-2 rounded shadow text-sm font-bold">📊 Statistik</button>
-            
+        
             <div id="group-rekomendasi" class="hidden flex gap-2 border-l pl-2 border-gray-300">
                 <button onclick="switchTab('rekomendasi_dialek')" id="tab-rekomendasi_dialek" class="tab-btn whitespace-nowrap bg-orange-100 text-orange-700 border border-orange-300 px-4 py-2 rounded shadow text-sm">📩 Rek. Dialek</button>
                 <button onclick="switchTab('rekomendasi_kata')" id="tab-rekomendasi_kata" class="tab-btn whitespace-nowrap bg-orange-100 text-orange-700 border border-orange-300 px-4 py-2 rounded shadow text-sm">📩 Rek. Kata</button>
@@ -55,58 +54,39 @@
         </div>
 
         <div id="statistikContainer" class="hidden mb-8">
-            <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4 md:p-6 text-center md:text-left">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-6">
-                    <div id="wrapper-statistik" class="w-full md:w-auto">
-                        <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-1">Total Perbendaharaan Kata</p>
-                        <h1 class="text-5xl font-black text-gray-800 leading-none mb-4" id="stat-total-gabungan">0</h1>
-                        
-                        <div class="flex items-center gap-6 justify-center md:justify-start border-t pt-4 border-gray-100">
-                            <div class="flex flex-col">
-                                <span class="text-2xl font-black text-green-600 leading-none" id="stat-total-kata">0</span>
-                                <span class="text-[10px] font-bold text-green-700 uppercase italic">Kosa Kata</span>
-                            </div>
-                            <div class="h-8 w-[1px] bg-gray-200"></div>
-                            <div class="flex flex-col">
-                                <span class="text-2xl font-black text-orange-500 leading-none" id="stat-total-turunan">0</span>
-                                <span class="text-[10px] font-bold text-orange-600 uppercase italic">Turunan</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button onclick="exportKamusToExcel(event)" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 transition-all shadow-md self-center md:self-start">
-                        <i class="fas fa-file-excel"></i> DOWNLOAD EXCEL
-                    </button>
-                </div>
-
-                <div class="h-[300px] w-full relative">
-                    <canvas id="chartAbjad"></canvas>
-                </div>
             </div>
-        </div>
 
         <div id="formContainer" class="bg-gray-50 p-4 md:p-6 rounded-lg mb-8 border-2 border-dashed border-gray-300">
             <div class="flex justify-between items-center mb-4 border-b pb-2">
                 <h2 id="formTitle" class="text-lg md:text-xl font-bold text-gray-700 italic">Form Input</h2>
             </div>
             
-            <div id="statusCheck" class="hidden mb-4 p-3 bg-blue-100 text-blue-700 rounded-lg text-sm font-bold text-center border border-blue-200"></div>
-            <input type="hidden" id="editId">
+            <input type="hidden" id="editIndex"> 
             
             <div id="inputs" class="grid grid-cols-1 gap-4"></div>
 
             <div id="panduan-dynamic-area" class="hidden mt-4">
                 <div id="list-poin-container" class="space-y-4"></div>
-                <button onclick="addPoinPanduan()" class="mt-4 w-full border-2 border-dashed border-purple-300 text-purple-600 py-3 rounded hover:bg-purple-50 font-bold">+ TAMBAH POIN / LANGKAH</button>
+                <button onclick="addPoinPanduan()" class="mt-4 w-full border-2 border-dashed border-purple-300 text-purple-600 py-3 rounded hover:bg-purple-50 font-bold">+ TAMBAH LANGKAH</button>
             </div>
 
             <div class="mt-6 flex flex-col md:flex-row gap-2">
-                <button onclick="saveData()" id="btnSave" class="w-full md:w-auto bg-green-600 text-white px-8 py-3 rounded font-bold hover:bg-green-700 shadow-md transition-colors">SIMPAN DATA</button>
-                <button onclick="resetForm()" class="w-full md:w-auto bg-gray-400 text-white px-6 py-3 rounded hover:bg-gray-500 transition-colors">BATAL</button>
+                <button onclick="saveData()" id="btnSave" class="w-full md:w-auto bg-green-600 text-white px-8 py-3 rounded font-bold hover:bg-green-700 shadow-md transition-colors">
+                    SIMPAN KE GITHUB
+                </button>
+
+                <button onclick="finishPublish()" id="btnPublish" class="hidden w-full md:w-auto bg-blue-600 text-white px-8 py-3 rounded font-bold hover:bg-blue-700 shadow-md transition-colors">
+                    <i class="fas fa-upload mr-2"></i> PUBLISH SEKARANG
+                </button>
+
+                <button onclick="resetForm()" class="w-full md:w-auto bg-gray-400 text-white px-6 py-3 rounded hover:bg-gray-500 transition-colors">
+                    BATAL
+                </button>
             </div>
         </div>
 
         <div id="tableWrapper" class="overflow-x-auto bg-white rounded-lg shadow border border-gray-200 custom-scroll">
+            <div id="loadingIndicator" class="hidden p-4 text-center text-blue-600 font-bold animate-pulse">Sedang sinkronisasi dengan GitHub...</div>
             <table class="w-full text-left border-collapse min-w-[600px]">
                 <thead><tr id="tableHeader" class="bg-gray-100 text-gray-700 uppercase text-[11px] font-bold tracking-wider"></tr></thead>
                 <tbody id="tableBody" class="text-gray-600 text-xs md:text-sm divide-y divide-gray-100"></tbody>
@@ -114,43 +94,49 @@
         </div>
     </div>
 
-    <script type="module" >
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, addDoc, deleteDoc, doc, updateDoc, onSnapshot, setDoc, getDoc, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+    <script>
+        // ==========================================
+        // KONFIGURASI GITHUB
+        // ==========================================
+        const GITHUB_TOKEN = ""; 
+        const REPO_OWNER = "yuliana-ulm"; 
+        const REPO_NAME = "baban"; 
+        const BRANCH = "main"; 
+        // ==========================================
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBvYn9DnN1jUrVHJqoEYUWwBKce3sksUyc",
-            authDomain: "kamusbahasabanjar1.firebaseapp.com",
-            projectId: "kamusbahasabanjar1",
-            storageBucket: "kamusbahasabanjar1.appspot.com",
-            messagingSenderId: "647625175893",
-            appId: "1:647625175893:web:bc56088338616b639275dc",
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        
         let currentTab = '';
         let currentUser = null; 
-        let tempReviewCollection = null; 
+        let currentFileSha = null; 
+        let currentDataCache = []; 
         window.panduanList = []; 
+        let myChart = null;
 
+        // --- AUTH ---
         window.handleLogin = async () => {
             const email = document.getElementById('loginEmail').value;
             const pass = document.getElementById('loginPassword').value;
             const btn = document.getElementById('btnLogin');
+            
             if (!email || !pass) return alert("Mohon isi email dan password!");
-            btn.innerText = "Memuat..."; btn.disabled = true;
+            btn.innerText = "Memverifikasi..."; btn.disabled = true;
+
             try {
-                const q = query(collection(db, "users"), where("email", "==", email), where("password", "==", pass));
-                const snap = await getDocs(q);
-                if (!snap.empty) {
-                    currentUser = { id: snap.docs[0].id, ...snap.docs[0].data() };
+                const users = await fetchGitHubFile('users');
+                let userList = Array.isArray(users) ? users : [users];
+                const user = userList.find(u => u.email === email && u.password === pass);
+                if (user) {
+                    currentUser = user;
                     sessionStorage.setItem("admin_kamus_user", JSON.stringify(currentUser));
                     initAdminPanel();
-                } else alert("Login Gagal! Cek email/password.");
-            } catch (e) { alert("Error: " + e.message); } 
-            finally { btn.innerText = "MASUK"; btn.disabled = false; }
+                } else {
+                    alert("Gagal Login! Cek email/password.");
+                }
+            } catch (e) {
+                alert("Error Koneksi: " + e.message);
+                console.error(e);
+            } finally {
+                btn.innerText = "MASUK"; btn.disabled = false;
+            }
         };
 
         window.handleLogout = () => { sessionStorage.removeItem("admin_kamus_user"); location.reload(); };
@@ -162,10 +148,9 @@
             document.getElementById('roleBadge').innerText = currentUser.role;
 
             const role = currentUser.role;
-            
             document.getElementById('tab-users').classList.add('hidden');
             document.getElementById('tab-dialek').classList.add('hidden');
-            document.getElementById('tab-kamus_banjar_indonesia').classList.add('hidden');
+            document.getElementById('tab-kamus_data').classList.add('hidden');
             document.getElementById('tab-panduan').classList.add('hidden');
             document.getElementById('tab-statistik').classList.add('hidden');
             document.getElementById('group-rekomendasi').classList.add('hidden');
@@ -176,7 +161,7 @@
                 switchTab('users');
             } else {
                 document.getElementById('tab-dialek').classList.remove('hidden');
-                document.getElementById('tab-kamus_banjar_indonesia').classList.remove('hidden');
+                document.getElementById('tab-kamus_data').classList.remove('hidden');
                 if (role === 'Admin Media') {
                     document.getElementById('tab-panduan').classList.remove('hidden');
                     document.getElementById('tab-statistik').classList.remove('hidden');
@@ -189,6 +174,29 @@
         const savedUser = sessionStorage.getItem("admin_kamus_user");
         if (savedUser) { currentUser = JSON.parse(savedUser); initAdminPanel(); }
 
+        // --- API ---
+        async function fetchGitHubFile(filename) {
+            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}.json?ref=${BRANCH}&t=${Date.now()}`;
+            const response = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } });
+            if (!response.ok) throw new Error(`File ${filename}.json tidak ditemukan.`);
+            const data = await response.json();
+            currentFileSha = data.sha; 
+            const content = decodeURIComponent(escape(atob(data.content)));
+            return JSON.parse(content);
+        }
+
+        async function saveToGitHub(filename, newDataArray) {
+            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}.json?ref=${BRANCH}&t=${Date.now()}`;
+            const contentString = JSON.stringify(newDataArray, null, 2);
+            const contentBase64 = btoa(unescape(encodeURIComponent(contentString)));
+            const body = { message: `Update ${filename}`, content: contentBase64, branch: BRANCH, sha: currentFileSha };
+            const response = await fetch(url, { method: 'PUT', headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+            if (!response.ok) { const err = await response.json(); throw new Error(err.message); }
+            const resJson = await response.json();
+            currentFileSha = resJson.content.sha; 
+        }
+
+        // --- NAV ---
         window.switchTab = (tab) => {
             currentTab = tab;
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -201,438 +209,315 @@
                 activeTab.classList.replace('bg-gray-200', color);
                 activeTab.classList.replace('text-gray-700', 'text-white');
             }
-            
-            document.getElementById('statistikContainer').classList.toggle('hidden', tab !== 'statistik');
-            document.getElementById('formContainer').classList.toggle('hidden', tab === 'statistik' || tab.includes('rekomendasi'));
-            document.getElementById('tableWrapper').classList.toggle('hidden', tab === 'statistik');
-            
-            if(tab === 'statistik') {
-                renderAbjadChart();
+            const statContainer = document.getElementById('statistikContainer');
+            const formContainer = document.getElementById('formContainer');
+            const tableWrapper = document.getElementById('tableWrapper');
+
+            if (tab === 'statistik') {
+                if(statContainer) statContainer.classList.remove('hidden');
+                if(formContainer) formContainer.classList.add('hidden');
+                if(tableWrapper) tableWrapper.classList.add('hidden');
+                if (typeof renderAbjadChart === 'function') renderAbjadChart();
             } else {
-                resetForm(); 
-                loadData();
+                if(statContainer) statContainer.classList.add('hidden');
+                if(tableWrapper) tableWrapper.classList.remove('hidden');
+                if (formContainer) {
+                    if(tab.includes('rekomendasi')) formContainer.classList.add('hidden');
+                    else formContainer.classList.remove('hidden');
+                }
+                if (typeof resetForm === 'function') resetForm();
+                if (typeof loadData === 'function') loadData();
             }
         };
 
+        // --- LOAD DATA ---
+        window.loadData = async () => {
+            const tbody = document.getElementById('tableBody');
+            const header = document.getElementById('tableHeader');
+            const loader = document.getElementById('loadingIndicator');
+            tbody.innerHTML = '';
+            loader.classList.remove('hidden');
+
+            try {
+                let rawData = await fetchGitHubFile(currentTab);
+                
+                if (currentTab === 'kamus_data' && !Array.isArray(rawData) && rawData.UTAMA) {
+                    let newData = [];
+                    rawData.UTAMA.forEach(u => {
+                        let wordObj = {
+                            kata: u.KATA || u.kata,
+                            sukukata: u['SUKU KATA'] || u.sukukata,
+                            definisi_umum: [{ definisi: u.DEFINISI || u.definisi, kelaskata: u['KELAS KATA'] || u.kelaskata, contoh: [{ banjar: u['CONTOH BANJAR'], indonesia: u['CONTOH INDO'] }] }],
+                            turunan: []
+                        };
+                        let turunanKey = `TURUNAN DARI: ${wordObj.kata}`;
+                        if (rawData[turunanKey]) {
+                            wordObj.turunan = rawData[turunanKey].map(t => ({
+                                kata: t.KATA, sukukata: t['SUKU KATA'],
+                                definisi_umum: [{ definisi: t.DEFINISI, kelaskata: t['KELAS KATA'], contoh: [{ banjar: t['CONTOH BANJAR'], indonesia: t['CONTOH INDO'] }] }]
+                            }));
+                        }
+                        newData.push(wordObj);
+                    });
+                    currentDataCache = newData;
+                } else {
+                    currentDataCache = Array.isArray(rawData) ? rawData : [];
+                }
+
+                if (currentTab === 'dialek') header.innerHTML = `<th class="p-3">Indo</th><th>Hulu</th><th>Kuala</th><th>Aksi</th>`;
+                else if (currentTab === 'panduan') header.innerHTML = `<th class="p-3">Judul Panduan</th><th>Jumlah Langkah</th><th>Aksi</th>`;
+                else if (currentTab === 'kamus_data') header.innerHTML = `<th class="p-3">Kata Utama</th><th>Definisi</th><th>Turunan</th><th>Aksi</th>`;
+                else if (currentTab === 'users') header.innerHTML = `<th class="p-3">Email</th><th>Role</th><th>Aksi</th>`;
+                else if (currentTab.includes('rekomendasi')) header.innerHTML = `<th class="p-3">Pengirim</th><th>Saran</th><th>Status</th><th>Aksi</th>`;
+
+                if (currentDataCache.length === 0) tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-gray-500 font-bold">Data kosong.</td></tr>`;
+
+                currentDataCache.forEach((d, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = "border-b hover:bg-gray-50 text-sm";
+                    let actionButtons = '';
+
+                    if (currentTab.includes('rekomendasi')) {
+                        if (d.status === 'Disetujui') actionButtons = `<span class="text-green-600 font-bold text-xs"><i class="fas fa-check"></i> Terpublikasi</span>`;
+                        else actionButtons = `<div class="flex gap-2"><button onclick="tinjauRekomendasi(${index})" class="bg-blue-100 text-blue-600 px-2 py-1 rounded text-xs font-bold">Tinjau</button><button onclick="hapusItem(${index})" class="bg-red-100 text-red-600 px-2 py-1 rounded text-xs font-bold">Tolak</button></div>`;
+                    } else {
+                        const btnEdit = `<button onclick='editItem(${index})' class="text-blue-600 font-bold hover:underline">Edit</button>`;
+                        const btnHapus = (currentUser.role === 'Admin Bahasa') ? '' : `<button onclick="hapusItem(${index})" class="text-red-500 font-bold ml-2 hover:underline">Hapus</button>`;
+                        actionButtons = `${btnEdit}${btnHapus}`;
+                    }
+
+                    if (currentTab === 'panduan') {
+                        const langkahCount = d.langkah_langkah ? d.langkah_langkah.length : 0;
+                        tr.innerHTML = `<td class="p-3 font-bold">${d.judul || 'Tanpa Judul'}</td><td>${langkahCount} Langkah</td><td class="p-3">${actionButtons}</td>`;
+                    } else if (currentTab === 'dialek') {
+                        tr.innerHTML = `<td class="p-3 font-bold">${d.indonesia}</td><td>${d.hulu || '-'}</td><td>${d.kuala || '-'}</td><td class="p-3">${actionButtons}</td>`;
+                    } else if (currentTab === 'kamus_data') {
+                        const listTurunan = d.turunan ? d.turunan.map(t => t.kata).join(", ") : "-";
+                        const def = d.definisi_umum?.[0]?.definisi || '-';
+                        tr.innerHTML = `<td class="p-3 font-bold text-green-700">${d.kata}</td><td class="text-xs text-gray-600 max-w-[200px] truncate">${def}</td><td class="text-[10px] text-gray-400 italic max-w-[150px] truncate">${listTurunan}</td><td class="p-3 whitespace-nowrap">${actionButtons}</td>`;
+                    } else if (currentTab === 'users') {
+                        tr.innerHTML = `<td class="p-3 font-bold">${d.email}</td><td>${d.role}</td><td class="p-3">${actionButtons}</td>`;
+                    } else if (currentTab.includes('rekomendasi')) {
+                        const saran = d.saran_kata || d.saran_dialek || '-';
+                        tr.innerHTML = `<td class="p-3 font-bold">${d.nama_pengirim || 'Anonim'}</td><td class="font-mono text-orange-600">${saran}</td><td><span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded font-bold">${d.status || 'Pending'}</span></td><td class="p-3">${actionButtons}</td>`;
+                    }
+                    tbody.appendChild(tr);
+                });
+            } catch (e) {
+                console.error(e); tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-red-500 font-bold">Error: ${e.message}</td></tr>`;
+            } finally { loader.classList.add('hidden'); }
+        };
+
+        // --- FORM HELPERS ---
+        function getFormDataFromInputs() {
+            let data = {};
+            if (document.getElementById('kata')) {
+                const kataVal = document.getElementById('kata').value.trim();
+                if(!kataVal) throw new Error("Kata Utama wajib diisi!");
+                data = {
+                    kata: kataVal, sukukata: document.getElementById('sukukata').value,
+                    definisi_umum: Array.from(document.querySelectorAll('.def-item')).map(el => ({ definisi: el.querySelector('.def-text').value, kelaskata: el.querySelector('.def-kelas').value, contoh: [{ banjar: el.querySelector('.ex-bjr').value, indonesia: el.querySelector('.ex-idn').value }] })),
+                    turunan: Array.from(document.querySelectorAll('.tur-item')).map(el => ({ kata: el.querySelector('.tur-kata').value, sukukata: el.querySelector('.tur-suku').value, definisi_umum: [{ definisi: el.querySelector('.tur-def').value, kelaskata: el.querySelector('.tur-kelas').value, contoh: [{ banjar: el.querySelector('.tur-ex-bjr').value, indonesia: el.querySelector('.tur-ex-idn').value }] }] }))
+                };
+            } else if (document.getElementById('hulu')) {
+                document.querySelectorAll('#inputs input').forEach(i => data[i.id] = i.value);
+            } else if (document.getElementById('judul')) {
+                syncPanduanInputToArray();
+                data = { judul: document.getElementById('judul').value, langkah_langkah: window.panduanList };
+            } else {
+                document.querySelectorAll('#inputs input, #inputs select').forEach(i => data[i.id] = i.value);
+            }
+            return data;
+        }
+
+        window.saveData = async () => {
+            const btn = document.getElementById('btnSave');
+            const originalText = btn.innerText;
+            btn.innerText = "Processing..."; btn.disabled = true;
+            try {
+                let formData = getFormDataFromInputs(); 
+                let dataArray = currentDataCache;
+                const index = document.getElementById('editIndex').value;
+
+                if (window.tempRecId !== undefined && window.tempRecId !== null && currentTab.includes('rekomendasi')) {
+                    dataArray[window.tempRecId].detail_lengkap = formData;
+                    if(currentTab === 'rekomendasi_kata') dataArray[window.tempRecId].saran_kata = formData.kata;
+                    else dataArray[window.tempRecId].saran_dialek = formData.indonesia;
+                    await saveToGitHub(currentTab, dataArray);
+                    alert("✅ Draft Rekomendasi berhasil di-update!");
+                } else if (currentUser.role === 'Admin Bahasa' && !currentTab.includes('rekomendasi')) {
+                     const targetRecTab = currentTab === 'kamus_data' ? 'rekomendasi_kata' : 'rekomendasi_dialek';
+                     const recItem = { id: Date.now().toString(), nama_pengirim: currentUser.email, tanggal: new Date().toISOString(), status: "Pending", saran_kata: formData.kata || null, saran_dialek: formData.indonesia || null, detail_lengkap: formData };
+                    let recData = await fetchGitHubFile(targetRecTab);
+                    if (!Array.isArray(recData)) recData = [];
+                    recData.push(recItem);
+                    await saveToGitHub(targetRecTab, recData);
+                    alert(`✅ Terkirim ke Admin Media (${targetRecTab})`);
+                } else {
+                    if (index !== "") dataArray[parseInt(index)] = formData; 
+                    else {
+                        if(currentTab === 'kamus_data' && dataArray.some(d => d.kata.toLowerCase() === formData.kata.toLowerCase())) throw new Error("Kata ini sudah ada di database!");
+                        if(currentTab === 'users') formData.id = Date.now().toString();
+                        dataArray.push(formData);
+                    }
+                    await saveToGitHub(currentTab, dataArray);
+                    alert(`✅ Data berhasil disimpan ke ${currentTab}`);
+                }
+                if (window.tempRecId === null || window.tempRecId === undefined) { resetForm(); loadData(); }
+            } catch (e) { alert("Error: " + e.message); } finally { btn.innerText = originalText; btn.disabled = false; }
+        };
+
+        window.finishPublish = async () => {
+            if(!confirm("Yakin data sudah benar dan ingin mempublikasikannya ke Kamus Utama?")) return;
+            const btn = document.getElementById('btnPublish');
+            btn.innerText = "Publishing..."; btn.disabled = true;
+            try {
+                const finalFormData = getFormDataFromInputs();
+                const targetMainFile = currentTab === 'rekomendasi_kata' ? 'kamus_data' : 'dialek';
+                let mainData = await fetchGitHubFile(targetMainFile);
+                if (!Array.isArray(mainData)) mainData = mainData.UTAMA || [];
+                if(targetMainFile === 'kamus_data') {
+                    const exists = mainData.some(d => (d.kata || d.KATA).toLowerCase() === finalFormData.kata.toLowerCase());
+                    if(exists && !confirm(`Kata "${finalFormData.kata}" sudah ada di Kamus Utama. Timpa/Duplikat?`)) { btn.innerText = "PUBLISH SEKARANG"; btn.disabled = false; return; }
+                }
+                mainData.push(finalFormData);
+                await saveToGitHub(targetMainFile, mainData);
+                let recData = await fetchGitHubFile(currentTab); 
+                if (Array.isArray(recData)) { recData.splice(window.tempRecId, 1); await saveToGitHub(currentTab, recData); }
+                alert("🎉 SUKSES! Data terbit di Kamus Utama.");
+                resetForm(); loadData();
+            } catch (e) { console.error(e); alert("Gagal Publish: " + e.message); } finally { btn.innerText = "PUBLISH SEKARANG"; btn.disabled = false; }
+        };
+
+        window.hapusItem = async (index) => {
+            if (!confirm("Yakin hapus data ini permanen?")) return;
+            try { currentDataCache.splice(index, 1); await saveToGitHub(currentTab, currentDataCache); loadData(); alert("Data berhasil dihapus."); } catch (e) { alert("Gagal hapus: " + e.message); }
+        };
+
+        const info = (msg) => `<span class="group relative ml-1 inline-block cursor-help"><i class="bg-gray-200 text-gray-600 rounded-full px-1.5 text-[10px] not-italic font-bold">i</i><div class="hidden group-hover:block absolute z-50 bottom-full left-0 mb-2 w-48 p-2 bg-gray-800 text-white text-[10px] rounded shadow-lg z-50">${msg}</div></span>`;
+        
         window.renderFormInputs = () => {
             const container = document.getElementById('inputs');
             container.innerHTML = '';
             document.getElementById('formTitle').innerText = `Input: ${currentTab.toUpperCase().replace(/_/g, ' ')}`;
             document.getElementById('panduan-dynamic-area').classList.add('hidden');
 
-            const info = (msg) => `
-                <span class="group relative ml-1 inline-block cursor-help">
-                    <i class="bg-gray-200 text-gray-600 rounded-full px-1.5 text-[10px] not-italic font-bold">i</i>
-                    <div class="hidden group-hover:block absolute z-50 bottom-full left-0 mb-2 w-48 p-2 bg-gray-800 text-white text-[10px] rounded shadow-lg leading-tight">
-                        ${msg}
-                    </div>
-                </span>`;
-
-            if (currentTab === 'dialek' || currentTab === 'rekomendasi_dialek') {
+            if (currentTab === 'dialek') {
                 container.innerHTML = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label class="text-xs font-bold text-gray-500 italic">Bahasa Indonesia ${info("Masukkan kata dasar dalam bahasa Indonesia baku.")}</label>
-                        <input type="text" id="indonesia" placeholder="Contoh: Bodoh" class="border p-3 rounded font-bold w-full">
-                    </div>
-                    <div>
-                        <label class="text-xs font-bold text-gray-500 italic">Konteks ${info("Penjelasan kapan kata ini digunakan (contoh: bahasa kasar, halus, atau sehari-hari).")}</label>
-                        <input type="text" id="keterangan" placeholder="Keterangan / Konteks" class="border p-3 rounded w-full">
-                    </div>
-                    <div class="bg-gray-50 p-3 rounded border">
-                        <label class="text-xs font-bold text-pink-600">BANJAR HULU ${info("Dialek yang digunakan di daerah Hulu Sungai (Pahuluan).")}</label>
-                        <input type="text" id="hulu" placeholder="Kata Hulu (Contoh: Bungul)" class="border p-2 rounded w-full mb-2">
-                        <div class="flex gap-2">
-                            <input type="text" id="audiohulu" placeholder="Link GDrive Audio" class="border p-2 rounded flex-1 text-xs">
-                            <button onclick="window.open('https://drive.google.com/drive/my-drive', '_blank')" class="bg-blue-500 text-white px-2 rounded text-xs">Buka Drive</button>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div><label class="text-xs font-bold text-gray-500">Bahasa Indonesia</label><input type="text" id="indonesia" class="border p-3 rounded w-full font-bold"></div>
+                        <div><label class="text-xs font-bold text-gray-500">Konteks</label><input type="text" id="keterangan" class="border p-3 rounded w-full"></div>
+                        <div class="bg-blue-50 p-3 rounded border border-blue-100">
+                             <label class="text-xs font-bold text-blue-600">Banjar Hulu</label>
+                             <input type="text" id="hulu" class="border p-2 rounded w-full mb-2">
+                             <div class="flex gap-2">
+                                <input type="text" id="audiohulu" placeholder="Link Audio" class="border p-2 rounded w-full text-xs">
+                                <button onclick="window.open('https://drive.google.com/drive/u/0/my-drive', '_blank')" class="bg-blue-600 text-white px-3 rounded text-[10px] whitespace-nowrap font-bold hover:bg-blue-700">Buka Drive</button>
+                             </div>
                         </div>
-                    </div>
-                    <div class="bg-gray-50 p-3 rounded border">
-                        <label class="text-xs font-bold text-blue-600">BANJAR KUALA ${info("Dialek yang digunakan di daerah Banjarmasin, Martapura, dan sekitarnya.")}</label>
-                        <input type="text" id="kuala" placeholder="Kata Kuala (Contoh: Bongol)" class="border p-2 rounded w-full mb-2">
-                        <div class="flex gap-2">
-                            <input type="text" id="audiokuala" placeholder="Link GDrive Audio" class="border p-2 rounded flex-1 text-xs">
-                            <button onclick="window.open('https://drive.google.com/drive/my-drive', '_blank')" class="bg-blue-500 text-white px-2 rounded text-xs">Buka Drive</button>
-                        </div>
-                    </div>
-                </div>`;
-            } 
-            else if (currentTab === 'kamus_banjar_indonesia' || currentTab === 'rekomendasi_kata') {
-                container.innerHTML = `
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div>
-                            <label class="text-xs font-bold text-gray-500 italic">Kata Utama ${info("Gunakan huruf kecil semua. Sistem akan otomatis mengecek duplikasi.")}</label>
-                            <input type="text" id="kata" onkeyup="checkExistingWord(this.value)" placeholder="Contoh: abah" class="border-2 p-3 rounded border-yellow-400 font-bold w-full">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-500 italic">Suku Kata ${info("Pisahkan suku kata dengan titik. Contoh: a.bah, ma.kan")}</label>
-                            <input type="text" id="sukukata" placeholder="Contoh: a.bah" class="border p-3 rounded w-full">
-                        </div>
-                    </div>
-                    <div id="def-list"></div>
-                    <button onclick="tambahDefinisiDOM()" type="button" class="w-full bg-blue-100 text-blue-700 py-2 rounded mb-4 text-xs font-bold border border-blue-200">+ Tambah Definisi</button>
-                    <div id="tur-list"></div>
-                    <button onclick="tambahTurunanDOM()" type="button" class="w-full bg-orange-100 text-orange-700 py-2 rounded text-xs font-bold border border-orange-200">+ Tambah Kata Turunan</button>`;
-                tambahDefinisiDOM();
-            } 
-            else if (currentTab === 'panduan') {
-                container.innerHTML = `<div class="mb-4">
-                    <label class="text-xs font-bold text-gray-500 italic">Judul Panduan ${info("Masukkan judul panduan untuk panduan aplikasi")}</label>
-                    <input type="text" id="judul" placeholder="Contoh: Cara Mencari Kata" class="border p-3 rounded w-full font-bold">
-                </div>`;
-                document.getElementById('panduan-dynamic-area').classList.remove('hidden');
-                renderPanduanList(); 
-            } 
-            else if (currentTab === 'users') {
-                container.innerHTML = `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="text-xs font-bold text-gray-500 italic">Email ${info("Gunakan email aktif yang belum terdaftar.")}</label>
-                            <input type="email" id="email" placeholder="Email User" class="border p-3 rounded w-full">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-gray-500 italic">Password ${info("Minimal 6 karakter kombinasi angka dan huruf.")}</label>
-                            <input type="text" id="password" placeholder="Password" class="border p-3 rounded w-full">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label class="text-xs font-bold text-gray-500 italic">Hak Akses ${info("Admin Bahasa: Edit Kamus & Dialek. Admin Media: Upload Audio & Gambar. Admin Utama: Semua Akses.")}</label>
-                            <select id="role" class="border p-3 rounded w-full">
-                                <option value="Admin Utama">Admin Utama</option>
-                                <option value="Admin Media">Admin Media</option>
-                                <option value="Admin Bahasa">Admin Bahasa</option>
-                            </select>
+                        <div class="bg-green-50 p-3 rounded border border-green-100">
+                             <label class="text-xs font-bold text-green-600">Banjar Kuala</label>
+                             <input type="text" id="kuala" class="border p-2 rounded w-full mb-2">
+                             <div class="flex gap-2">
+                                <input type="text" id="audiokuala" placeholder="Link Audio" class="border p-2 rounded w-full text-xs">
+                                <button onclick="window.open('https://drive.google.com/drive/u/0/my-drive', '_blank')" class="bg-green-600 text-white px-3 rounded text-[10px] whitespace-nowrap font-bold hover:bg-green-700">Buka Drive</button>
+                             </div>
                         </div>
                     </div>`;
-            }
-        };
-
-        window.addPoinPanduan = () => { syncPanduanInputToArray(); window.panduanList.push({ judul_poin: "", foto_url: "", isi_penjelasan: "" }); renderPanduanList(); };
-        window.removePoinPanduan = (index) => { syncPanduanInputToArray(); if(confirm("Hapus poin ini?")) { window.panduanList.splice(index, 1); renderPanduanList(); } };
-        window.movePoin = (index, direction) => {
-            syncPanduanInputToArray();
-            if (direction === -1 && index > 0) [window.panduanList[index], window.panduanList[index - 1]] = [window.panduanList[index - 1], window.panduanList[index]];
-            else if (direction === 1 && index < window.panduanList.length - 1) [window.panduanList[index], window.panduanList[index + 1]] = [window.panduanList[index + 1], window.panduanList[index]];
-            renderPanduanList();
-        };
-        function syncPanduanInputToArray() {
-            const container = document.getElementById('list-poin-container');
-            if (!container) return;
-            container.querySelectorAll('.panduan-item').forEach((item, idx) => {
-                if (window.panduanList[idx]) {
-                    window.panduanList[idx].judul_poin = item.querySelector('.inp-judul').value;
-                    window.panduanList[idx].foto_url = item.querySelector('.inp-foto').value;
-                    window.panduanList[idx].isi_penjelasan = item.querySelector('.inp-isi').value;
-                }
-            });
-        }
-        
-        function renderPanduanList() {
-            const container = document.getElementById('list-poin-container');
-            if (!container) return;
-            container.innerHTML = '';
-
-            const info = (msg) => `
-                <span class="group relative ml-1 inline-block cursor-help">
-                    <i class="bg-gray-200 text-gray-600 rounded-full px-1.5 text-[10px] not-italic font-bold">i</i>
-                    <div class="hidden group-hover:block absolute z-50 bottom-full left-0 mb-2 w-48 p-2 bg-gray-800 text-white text-[10px] rounded shadow-lg leading-tight font-normal">
-                        ${msg}
-                    </div>
-                </span>`;
-
-            window.panduanList.forEach((item, index) => {
-                const div = document.createElement('div');
-                div.className = "panduan-item bg-purple-50 p-4 rounded border border-purple-200 relative mb-4";
-                div.innerHTML = `
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded">Langkah ${index + 1}</span>
-                        <div class="flex gap-1">
-                            <button onclick="movePoin(${index}, -1)" class="bg-gray-300 hover:bg-gray-400 px-2 py-1 rounded text-xs" ${index === 0 ? 'disabled' : ''}>⬆</button>
-                            <button onclick="movePoin(${index}, 1)" class="bg-gray-300 hover:bg-gray-400 px-2 py-1 rounded text-xs" ${index === window.panduanList.length - 1 ? 'disabled' : ''}>⬇</button>
-                            <button onclick="removePoinPanduan(${index})" class="bg-red-500 text-white px-2 py-1 rounded text-xs ml-2 font-bold">Hapus</button>
-                        </div>
-                    </div>
-
-                    <div class="mb-2">
-                        <label class="text-[10px] font-bold text-purple-700 uppercase">Judul Langkah ${info("Masukkan judul singkat untuk langkah ini.")}</label>
-                        <input type="text" class="inp-judul border p-2 rounded w-full text-sm font-bold" placeholder="Contoh: Buka Menu Pengaturan" value="${item.judul_poin || ''}">
-                    </div>
-
-                    <div class="mb-2">
-                        <label class="text-[10px] font-bold text-purple-700 uppercase">Link Foto GDrive ${info("Masukkan link gambar tutorial yang sudah di-share 'Anyone with the link'.")}</label>
-                        <div class="flex gap-2">
-                            <input type="text" class="inp-foto border p-2 rounded w-full text-xs flex-1" placeholder="https://drive.google.com/..." value="${item.foto_url || ''}">
-                            <button onclick="window.open('https://drive.google.com/drive/my-drive', '_blank')" class="bg-purple-500 text-white px-3 rounded text-[10px] whitespace-nowrap font-bold">BUKA DRIVE</button>
-                        </div>
-                    </div>
-
-                    <div class="mb-1">
-                        <label class="text-[10px] font-bold text-purple-700 uppercase">Detail Penjelasan ${info("Jelaskan secara rinci apa yang harus dilakukan pada langkah ini.")}</label>
-                        <textarea class="inp-isi border p-2 rounded w-full text-sm h-20" placeholder="Ketik langkah-langkah detail di sini...">${item.isi_penjelasan || ''}</textarea>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        window.saveData = async () => {
-            const id = document.getElementById('editId').value;
-            let data = {};
-            if (currentTab === 'panduan') { syncPanduanInputToArray(); data = { judul: document.getElementById('judul').value, langkah_langkah: window.panduanList }; } 
-            else if (currentTab.includes('kamus') || currentTab === 'rekomendasi_kata') {
-                const kataVal = document.getElementById('kata').value.trim();
-                if(!kataVal) return alert("Kata Utama wajib diisi!");
-                data = {
-                    kata: kataVal, sukukata: document.getElementById('sukukata').value,
-                    definisi_umum: Array.from(document.querySelectorAll('.def-item')).map(el => ({
-                        definisi: el.querySelector('.def-text').value, kelaskata: el.querySelector('.def-kelas').value,
-                        contoh: [{ banjar: el.querySelector('.ex-bjr').value, indonesia: el.querySelector('.ex-idn').value }]
-                    })),
-                    turunan: Array.from(document.querySelectorAll('.tur-item')).map(el => ({
-                        kata: el.querySelector('.tur-kata').value, sukukata: el.querySelector('.tur-suku').value,
-                        definisi_umum: [{ definisi: el.querySelector('.tur-def').value, kelaskata: el.querySelector('.tur-kelas').value, contoh: [{ banjar: el.querySelector('.tur-ex-bjr').value, indonesia: el.querySelector('.tur-ex-idn').value }] }]
-                    }))
-                };
-            } else { document.querySelectorAll('#inputs input, #inputs textarea, #inputs select').forEach(i => data[i.id] = i.value); }
-
-            try {
-                if (currentUser.role === 'Admin Bahasa') {
-                    let targetCol = currentTab === 'dialek' ? "rekomendasi_dialek" : "rekomendasi_kata";
-                    await addDoc(collection(db, targetCol), { ...data, pengirim: currentUser.email, timestamp: new Date() });
-                    alert("✅ Data berhasil dikirim sebagai Rekomendasi!");
-                } else {
-                    let targetTab = currentTab;
-                    if (window.tempRecId && tempReviewCollection) targetTab = tempReviewCollection === 'rekomendasi_dialek' ? 'dialek' : 'kamus_banjar_indonesia';
-                    if (targetTab === 'kamus_banjar_indonesia') {
-                        if(data.kata) await setDoc(doc(db, targetTab, data.kata.toLowerCase()), data);
-                        else return alert("Error: Kata utama tidak ditemukan.");
-                    } else {
-                        if (id) await updateDoc(doc(db, targetTab, id), data); 
-                        else await addDoc(collection(db, targetTab), data); 
-                    }
-                    if (window.tempRecId) { await deleteDoc(doc(db, tempReviewCollection, window.tempRecId)); alert("✅ Rekomendasi Disetujui!"); }
-                    else alert("✅ Data Berhasil Disimpan!");
-                }
-                resetForm();
-            } catch (e) { alert("Error: " + e.message); }
-        };
-
-        window.loadData = () => {
-            if (currentUser.role === 'Admin Utama' && currentTab !== 'users') return;
-            onSnapshot(collection(db, currentTab), (snap) => {
-                const tbody = document.getElementById('tableBody');
-                const header = document.getElementById('tableHeader');
-                tbody.innerHTML = '';
-                if (currentTab === 'dialek') header.innerHTML = `<th class="p-3">Indo</th><th>Hulu</th><th>Kuala</th><th>Aksi</th>`;
-                else if (currentTab === 'panduan') header.innerHTML = `<th class="p-3">Judul Panduan</th><th>Jumlah Langkah</th><th>Aksi</th>`;
-                else if (currentTab === 'kamus_banjar_indonesia') header.innerHTML = `<th class="p-3">Kata Utama</th><th>Definisi</th><th>Turunan</th><th>Aksi</th>`;
-                else if (currentTab === 'users') header.innerHTML = `<th class="p-3">Email</th><th>Role</th><th>Aksi</th>`;
-                else if (currentTab.includes('rekomendasi')) header.innerHTML = `<th class="p-3">Data Yang Diajukan</th><th>Pengirim</th><th>Aksi</th>`;
-
-                snap.forEach(docSnap => {
-                    const d = docSnap.data();
-                    const tr = document.createElement('tr');
-                    tr.className = "border-b hover:bg-gray-50";
-
-                    const btnEdit = `<button onclick='editItem("${docSnap.id}", ${JSON.stringify(d).replace(/'/g, "&apos;")})' class="text-blue-600 font-bold">Edit</button>`;
-                    const btnHapus = currentUser.role !== 'Admin Bahasa' ? `<button onclick="hapusItem('${docSnap.id}')" class="text-red-500 font-bold ml-2">Hapus</button>` : '';
-
-                    if (currentTab === 'panduan') {
-                        tr.innerHTML = `
-                            <td class="p-3 font-bold">${d.judul}</td>
-                            <td>${d.langkah_langkah?.length || 0} Langkah</td>
-                            <td class="p-3 whitespace-nowrap">${btnEdit}${btnHapus}</td>`;
-
-                    } else if (currentTab === 'dialek') {
-                        tr.innerHTML = `
-                            <td class="p-3 font-bold">${d.indonesia}</td>
-                            <td>${d.hulu || '-'}</td>
-                            <td>${d.kuala || '-'}</td>
-                            <td class="p-3 whitespace-nowrap">${btnEdit}${btnHapus}</td>`;
-
-                    } else if (currentTab === 'kamus_banjar_indonesia') {
-                        const jmlTurunan = d.turunan ? d.turunan.length : 0;
-                        const listTurunan = d.turunan ? d.turunan.map(t => t.kata).join(", ") : "-";
-                        
-                        tr.innerHTML = `
-                            <td class="p-3 font-bold text-green-700">${d.kata}</td>
-                            <td class="text-xs">${d.definisi_umum?.length || 0} Def</td>
-                            <td class="text-[10px] text-gray-400 italic max-w-[150px] truncate">
-                                <span class="text-orange-600 font-bold">${jmlTurunan} Turunan:</span><br>
-                                ${listTurunan}
-                            </td>
-                            <td class="p-3 whitespace-nowrap">${btnEdit}${btnHapus}</td>`;
-
-                    } else if (currentTab === 'users') {
-                        tr.innerHTML = `
-                            <td class="p-3 font-bold">${d.email}</td>
-                            <td>${d.role}</td>
-                            <td class="p-3 whitespace-nowrap">${btnEdit}${btnHapus}</td>`;
-
-                    } else if (currentTab.includes('rekomendasi')) {
-                        tr.innerHTML = `
-                            <td class="p-3 font-bold text-orange-600">${d.kata || d.indonesia}</td>
-                            <td class="text-[10px]">${d.pengirim}</td>
-                            <td class="p-3 flex gap-2">
-                                <button onclick='tinjauRekomendasi("${docSnap.id}", ${JSON.stringify(d).replace(/'/g, "&apos;")})' 
-                                    class="bg-blue-600 text-white px-3 py-1 rounded text-xs shadow hover:bg-blue-700 transition-colors">
-                                    Tinjau
-                                </button>
-                                
-                                <button onclick="if(confirm('Tolak dan hapus rekomendasi ini?')) hapusItem('${docSnap.id}')" 
-                                    class="bg-red-100 text-red-600 border border-red-200 px-3 py-1 rounded text-xs shadow-sm hover:bg-red-600 hover:text-white transition-all">
-                                    Tolak
-                                </button>
-                            </td>`;
-                    }
-                    tbody.appendChild(tr);
-                });
-            });
-        };
-
-        window.renderAbjadChart = async () => {
-            try {
-                const snap = await getDocs(collection(db, "kamus_banjar_indonesia"));
-                const alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-                
-                let totalTurunan = 0;
-                const countsKata = {};
-                const countsTurunan = {};
-                
-                alfabet.forEach(h => { 
-                    countsKata[h] = 0; 
-                    countsTurunan[h] = 0; 
-                });
-
-                snap.forEach(doc => {
-                    const d = doc.data();
-                    const kataUtama = d.kata || "";
-                    const hurufPertama = kataUtama.charAt(0).toUpperCase();
-
-                    if (countsKata.hasOwnProperty(hurufPertama)) {
-                        countsKata[hurufPertama]++;
-                        if (d.turunan) {
-                            countsTurunan[hurufPertama] += d.turunan.length;
-                            totalTurunan += d.turunan.length;
-                        }
-                    }
-                });
-
-                const totalKosaKata = snap.size;
-                const totalGabungan = totalKosaKata + totalTurunan;
-
-                const container = document.getElementById('statistikContainer');
-                if (container) {
-                    container.classList.remove('hidden');
-                    
-                    container.innerHTML = `
-                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-6 text-center">
-                            <div class="mb-6 pb-6 border-b border-dashed border-gray-200">
-                                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-2">Total Perbendaharaan Kata</p>
-                                <h1 class="text-6xl font-black text-gray-800">${totalGabungan.toLocaleString()}</h1>
-                            </div>
-
-                            <div class="flex justify-around items-center max-w-md mx-auto">
-                                <div class="flex flex-col">
-                                    <span class="text-3xl font-black text-green-600">${totalKosaKata.toLocaleString()}</span>
-                                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Kosa Kata Utama</span>
-                                </div>
-                                <div class="h-10 w-[2px] bg-gray-100"></div>
-                                <div class="flex flex-col">
-                                    <span class="text-3xl font-black text-orange-500">${totalTurunan.toLocaleString()}</span>
-                                    <span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Kata Turunan</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-sm font-bold text-gray-700 uppercase">Distribusi Abjad</h3>
-                                <button onclick="exportKamusToExcel(event)" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-bold text-xs flex items-center gap-2 transition-all">
-                                    <i class="fas fa-file-excel"></i> DOWNLOAD EXCEL
-                                </button>
-                            </div>
-                            <div class="h-[300px] w-full">
-                                <canvas id="chartAbjad"></canvas>
-                            </div>
-                        </div>
-                    `;
-                }
-
-                const ctx = document.getElementById('chartAbjad');
-                if (ctx) {
-                    if (window.myChart) window.myChart.destroy();
-
-                    window.myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: alfabet,
-                            datasets: [
-                                {
-                                    label: 'Kosa Kata Utama',
-                                    data: alfabet.map(h => countsKata[h]),
-                                    backgroundColor: '#16a34a',
-                                },
-                                {
-                                    label: 'Kata Turunan',
-                                    data: alfabet.map(h => countsTurunan[h]),
-                                    backgroundColor: '#f97316',
-                                }]},
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: { legend: { display: false } },
-                            scales: {
-                                y: { beginAtZero: true, grid: { display: false } },
-                                x: { grid: { display: false } }
-                            }
+            } else if (currentTab === 'kamus_data') {
+                container.innerHTML = `<div class="grid grid-cols-2 gap-4 mb-4"><div><label class="text-xs font-bold text-gray-500">Kata Utama</label><input type="text" id="kata" class="border-2 p-3 rounded border-yellow-400 font-bold w-full"></div><div><label class="text-xs font-bold text-gray-500">Suku Kata</label><input type="text" id="sukukata" class="border p-3 rounded w-full"></div></div><div id="def-list"></div><button onclick="tambahDefinisiDOM()" class="w-full bg-blue-100 text-blue-700 py-2 rounded mb-4 text-xs font-bold">+ Definisi</button><div id="tur-list"></div><button onclick="tambahTurunanDOM()" class="w-full bg-orange-100 text-orange-700 py-2 rounded text-xs font-bold">+ Turunan</button>`;
+                tambahDefinisiDOM();
+                const inputKata = document.getElementById('kata');
+                if(inputKata) {
+                    inputKata.addEventListener('blur', function() {
+                        const keyword = this.value.trim().toLowerCase();
+                        if(!keyword) return;
+                        const foundIndex = currentDataCache.findIndex(d => d.kata.toLowerCase() === keyword);
+                        if (foundIndex !== -1) {
+                            const data = currentDataCache[foundIndex];
+                            document.getElementById('sukukata').value = data.sukukata || '';
+                            document.getElementById('def-list').innerHTML = '';
+                            if(data.definisi_umum) data.definisi_umum.forEach(d => tambahDefinisiDOM(d));
+                            document.getElementById('tur-list').innerHTML = '';
+                            if(data.turunan) data.turunan.forEach(t => tambahTurunanDOM(t));
+                            document.getElementById('editIndex').value = foundIndex;
+                            document.getElementById('btnSave').innerText = "UPDATE DATA (Ditemukan)";
+                            showNotification(`Kata "${keyword}" ditemukan!`);
                         }
                     });
                 }
-
-            } catch (error) {
-                console.error("Gagal render chart:", error);
+            } else if (currentTab === 'panduan') {
+                container.innerHTML = `<label class="text-xs font-bold text-gray-500">Judul Panduan</label><input type="text" id="judul" class="border p-3 rounded w-full font-bold">`;
+                document.getElementById('panduan-dynamic-area').classList.remove('hidden');
+                renderPanduanList();
+            } else if (currentTab === 'users') {
+                container.innerHTML = `<div class="grid md:grid-cols-2 gap-4"><div><label class="text-xs font-bold text-gray-500">Email</label><input type="email" id="email" class="border p-3 rounded w-full"></div><div><label class="text-xs font-bold text-gray-500">Password</label><input type="text" id="password" class="border p-3 rounded w-full"></div><div class="md:col-span-2"><label class="text-xs font-bold text-gray-500">Role</label><select id="role" class="border p-3 rounded w-full"><option value="Admin Utama">Admin Utama</option><option value="Admin Bahasa">Admin Bahasa</option><option value="Admin Media">Admin Media</option></select></div></div>`;
+            } else if (currentTab.includes('rekomendasi')) {
+                container.innerHTML = `<div class="grid md:grid-cols-2 gap-4"><div><label class="text-xs font-bold text-gray-500">Nama Pengirim</label><input type="text" id="nama_pengirim" class="border p-3 rounded w-full"></div><div><label class="text-xs font-bold text-gray-500">Saran Kata/Dialek</label><input type="text" id="${currentTab === 'rekomendasi_kata' ? 'saran_kata' : 'saran_dialek'}" class="border p-3 rounded w-full font-bold"></div><div><label class="text-xs font-bold text-gray-500">Status</label><select id="status" class="border p-3 rounded w-full"><option value="Pending">Pending</option><option value="Disetujui">Disetujui</option><option value="Ditolak">Ditolak</option></select></div></div>`;
             }
         };
 
-        window.exportKamusToExcel = async (event) => {
-            const btn = event.currentTarget;
-            btn.innerHTML = "⌛ Memproses...";
-            try {
-                const snap = await getDocs(collection(db, "kamus_banjar_indonesia"));
-                const rows = [];
-                snap.forEach(docSnap => {
-                    const d = docSnap.data();
-                    rows.push({
-                        "TIPE": "UTAMA",
-                        "KATA": d.kata || "",
-                        "SUKU KATA": d.sukukata || "",
-                        "DEFINISI": d.definisi_umum?.[0]?.definisi || "",
-                        "KELAS KATA": d.definisi_umum?.[0]?.kelaskata || "",
-                        "CONTOH BANJAR": d.definisi_umum?.[0]?.contoh?.[0]?.banjar || "",
-                        "CONTOH INDO": d.definisi_umum?.[0]?.contoh?.[0]?.indonesia || ""
-                    });
-                    (d.turunan || []).forEach(t => {
-                        rows.push({
-                            "TIPE": "TURUNAN DARI: " + d.kata,
-                            "KATA": t.kata || "",
-                            "SUKU KATA": t.sukukata || "",
-                            "DEFINISI": t.definisi_umum?.[0]?.definisi || "",
-                            "KELAS KATA": t.definisi_umum?.[0]?.kelaskata || "",
-                            "CONTOH BANJAR": t.definisi_umum?.[0]?.contoh?.[0]?.banjar || "",
-                            "CONTOH INDO": t.definisi_umum?.[0]?.contoh?.[0]?.indonesia || ""
-                        });
-                    });
-                });
-                const ws = XLSX.utils.json_to_sheet(rows);
-                const wb = XLSX.utils.book_new();
-                XLSX.utils.book_append_sheet(wb, ws, "Database Kamus");
-                XLSX.writeFile(wb, `Kamus_Banjar_Lengkap_${new Date().toLocaleDateString()}.xlsx`);
-            } catch (e) { alert(e.message); }
-            btn.innerHTML = `<i class="fas fa-file-excel"></i> DOWNLOAD EXCEL LENGKAP`;
+        window.tinjauRekomendasi = (index) => {
+            window.tempRecId = index; window.tempReviewCollection = currentTab;
+            const recData = currentDataCache[index];
+            const targetFormTab = currentTab === 'rekomendasi_dialek' ? 'dialek' : 'kamus_data';
+            const originalTab = currentTab; currentTab = targetFormTab; renderFormInputs(); currentTab = originalTab;
+            document.getElementById('formContainer').classList.remove('hidden'); document.getElementById('tableWrapper').classList.add('hidden'); 
+            const dataIsi = recData.detail_lengkap || recData; 
+            fillFormWithData(dataIsi);
+            if(document.getElementById('nama_pengirim')) document.getElementById('nama_pengirim').value = recData.nama_pengirim || '';
+            if(document.getElementById('status')) document.getElementById('status').value = recData.status || 'Pending';
+            document.getElementById('formTitle').innerText = "🔍 Mode Tinjau (Edit sebelum Publish)";
+            document.getElementById('formTitle').className = "text-xl font-bold text-orange-600 mb-4";
+            const btnSave = document.getElementById('btnSave'); btnSave.innerText = "UPDATE DRAFT (Di Rekomendasi)"; btnSave.classList.replace('bg-green-600', 'bg-orange-500'); 
+            document.getElementById('btnPublish').classList.remove('hidden'); document.getElementById('editIndex').value = index; window.scrollTo({ top: 0, behavior: 'smooth' });
         };
 
-        const opsiKelasKata = `<option value="">- Kelas -</option>
-            <option value="Nomina">Nomina (Kata Benda)</option>
+        window.editItem = (index) => {
+            document.getElementById('editIndex').value = index;
+            const data = currentDataCache[index];
+            document.getElementById('btnSave').innerText = "UPDATE DATA";
+            document.getElementById('formContainer').classList.remove('hidden'); 
+            if (currentTab.includes('rekomendasi')) {
+                const formData = data.detail_lengkap || {}; 
+                if(document.getElementById('nama_pengirim')) document.getElementById('nama_pengirim').value = data.nama_pengirim || '';
+                if(document.getElementById('status')) document.getElementById('status').value = data.status || 'Pending';
+                if(document.getElementById('saran_kata')) document.getElementById('saran_kata').value = data.saran_kata || '';
+                if(document.getElementById('saran_dialek')) document.getElementById('saran_dialek').value = data.saran_dialek || '';
+                fillFormWithData(formData);
+            } else { fillFormWithData(data); }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        };
+
+        function fillFormWithData(data) {
+            if (document.getElementById('kata')) {
+                document.getElementById('kata').value = data.kata || ''; document.getElementById('sukukata').value = data.sukukata || ''; document.getElementById('def-list').innerHTML = ""; document.getElementById('tur-list').innerHTML = "";
+                if (data.definisi_umum) data.definisi_umum.forEach(d => tambahDefinisiDOM(d)); else tambahDefinisiDOM();
+                if (data.turunan) data.turunan.forEach(t => tambahTurunanDOM(t));
+            } else if (document.getElementById('hulu')) {
+                document.getElementById('indonesia').value = data.indonesia || ''; document.getElementById('keterangan').value = data.keterangan || ''; document.getElementById('hulu').value = data.hulu || ''; document.getElementById('audiohulu').value = data.audiohulu || data.audio_hulu || ''; document.getElementById('kuala').value = data.kuala || ''; document.getElementById('audiokuala').value = data.audiokuala || data.audio_kuala || '';
+            } else if (document.getElementById('judul')) {
+                document.getElementById('judul').value = data.judul || ''; window.panduanList = data.langkah_langkah || []; renderPanduanList();
+            } else {
+                for (let key in data) { if(document.getElementById(key)) document.getElementById(key).value = data[key]; }
+            }
+        }
+
+        window.resetForm = () => {
+            document.getElementById('editIndex').value = "";
+            const btnSave = document.getElementById('btnSave'); btnSave.innerText = "SIMPAN KE GITHUB"; btnSave.classList.replace('bg-orange-500', 'bg-green-600');
+            document.getElementById('btnPublish').classList.add('hidden');
+            if (currentTab.includes('rekomendasi')) document.getElementById('formContainer').classList.add('hidden');
+            else document.getElementById('formContainer').classList.remove('hidden');
+            document.getElementById('tableWrapper').classList.remove('hidden');
+            window.tempRecId = null; window.panduanList = []; renderFormInputs();
+        };
+
+        // --- 11 PILIHAN KELAS KATA ---
+        const opsiKelasKata = `
+            <option value="">- Pilih Kelas Kata -</option>
             <option value="Verba">Verba (Kata Kerja)</option>
+            <option value="Nomina">Nomina (Kata Benda)</option>
             <option value="Adjektiva">Adjektiva (Kata Sifat)</option>
             <option value="Adverbia">Adverbia (Kata Keterangan)</option>
             <option value="Pronomina">Pronomina (Kata Ganti)</option>
@@ -641,118 +526,90 @@
             <option value="Konjungsi">Konjungsi (Kata Hubung)</option>
             <option value="Interjeksi">Interjeksi (Kata Seru)</option>
             <option value="Artikula">Artikula (Kata Sandang)</option>
-            <option value="Partikel Penegas">Partikel Penegas</option>`;
-        const info = (msg) => `
-            <span class="group relative ml-1 inline-block cursor-help">
-                <i class="bg-gray-300 text-gray-700 rounded-full px-1.5 text-[9px] not-italic font-bold">i</i>
-                <div class="hidden group-hover:block absolute z-50 bottom-full left-1/2 -translate-x-1/2 mb-2 w-40 p-2 bg-gray-800 text-white text-[10px] rounded shadow-xl leading-tight font-normal normal-case">
-                    ${msg}
-                    <div class="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-gray-800"></div>
-                </div>
-            </span>`;
+            <option value="Partikel">Partikel (Kata Tugas)</option>
+        `;
 
-        window.tambahDefinisiDOM = (data={}) => {
-            const c = document.getElementById('def-list'); if(!c)return;
-            const div = document.createElement('div');
-            div.className = "def-item bg-blue-50 p-3 rounded border border-blue-200 mb-2 relative";
-            div.innerHTML = `
-                <button onclick="this.parentElement.remove()" class="absolute top-1 right-2 text-red-500 font-bold">×</button>
-                
-                <label class="text-[10px] font-bold text-blue-600 block mb-1 uppercase">
-                    Definisi ${info("Artikan kata utama ke bahasa Indonesia yang paling mendekati.")}
-                </label>
-                <input class="def-text w-full p-2 border rounded mb-2 text-sm" placeholder="Definisi" value="${data.definisi||''}">
-                
-                <label class="text-[10px] font-bold text-blue-600 block mb-1 uppercase">
-                    Kelas Kata ${info("Nomina = Benda, Verba = Kerja, Adjektiva = Sifat, dll.")}
-                </label>
-                <select class="def-kelas w-full p-2 border rounded mb-2 text-sm">${opsiKelasKata}</select>
-                
-                <label class="text-[10px] font-bold text-blue-600 block mb-1 uppercase">
-                    Contoh Penggunaan ${info("Contoh kalimat menggunakan kata utama dan artinya.")}
-                </label>
-                <div class="grid grid-cols-2 gap-2">
-                    <input class="ex-bjr w-full p-2 border rounded text-xs" placeholder="Cth Banjar" value="${data.contoh?.[0]?.banjar||''}">
-                    <input class="ex-idn w-full p-2 border rounded text-xs" placeholder="Cth Indo" value="${data.contoh?.[0]?.indonesia||''}">
-                </div>`;
-            if(data.kelaskata) div.querySelector('.def-kelas').value = data.kelaskata;
-            c.appendChild(div);
+        window.tambahDefinisiDOM = (d={}) => {
+            const c = document.getElementById('def-list'); if(!c) return; const div = document.createElement('div'); div.className = "def-item bg-blue-50 p-3 mb-2 border border-blue-200 rounded relative";
+            div.innerHTML = `<button onclick="this.parentElement.remove()" class="absolute top-1 right-2 text-red-500">×</button><input class="def-text w-full mb-1 border p-1 text-sm" value="${d.definisi||''}" placeholder="Definisi"><select class="def-kelas w-full mb-1 border p-1 text-sm">${opsiKelasKata}</select><div class="grid grid-cols-2 gap-1"><input class="ex-bjr border p-1 text-xs" placeholder="Banjar" value="${d.contoh?.[0]?.banjar||''}"><input class="ex-idn border p-1 text-xs" placeholder="Indo" value="${d.contoh?.[0]?.indonesia||''}"></div>`;
+            if(d.kelaskata) div.querySelector('.def-kelas').value = d.kelaskata; c.appendChild(div);
+        }
+        window.tambahTurunanDOM = (t={}) => {
+            const c = document.getElementById('tur-list'); if(!c) return; const div = document.createElement('div'); div.className = "tur-item bg-orange-50 p-3 mb-2 border border-orange-200 rounded relative";
+            div.innerHTML = `<button onclick="this.parentElement.remove()" class="absolute top-1 right-2 text-red-500">×</button><input class="tur-kata w-full border p-1 font-bold text-sm" value="${t.kata||''}" placeholder="Turunan"><input class="tur-suku w-full border p-1 text-sm" value="${t.sukukata||''}" placeholder="Suku Kata"><input class="tur-def w-full border p-1 text-sm" value="${t.definisi_umum?.[0]?.definisi||''}" placeholder="Definisi"><select class="tur-kelas w-full border p-1 text-sm">${opsiKelasKata}</select><div class="grid grid-cols-2 gap-1"><input class="tur-ex-bjr border p-1 text-xs" placeholder="Banjar" value="${t.definisi_umum?.[0]?.contoh?.[0]?.banjar||''}"><input class="tur-ex-idn border p-1 text-xs" placeholder="Indo" value="${t.definisi_umum?.[0]?.contoh?.[0]?.indonesia||''}"></div>`;
+            if(t.definisi_umum?.[0]?.kelaskata) div.querySelector('.tur-kelas').value = t.definisi_umum[0].kelaskata; c.appendChild(div);
         }
 
-        window.tambahTurunanDOM = (data={}) => {
-            const c = document.getElementById('tur-list'); if(!c)return;
-            const div = document.createElement('div');
-            div.className = "tur-item bg-orange-50 p-3 rounded border border-orange-200 mb-2 relative";
-            div.innerHTML = `
-                <button onclick="this.parentElement.remove()" class="absolute top-1 right-2 text-red-500 font-bold">×</button>
-                
-                <div class="grid grid-cols-2 gap-2 mb-2">
-                    <div>
-                        <label class="text-[10px] font-bold text-orange-600 block mb-1 uppercase">Kata Turunan ${info("Kata yang sudah berimbuhan. Contoh: Makan -> Mamakan.")}</label>
-                        <input class="tur-kata w-full p-2 border rounded text-sm font-bold" placeholder="Turunan" value="${data.kata||''}">
-                    </div>
-                    <div>
-                        <label class="text-[10px] font-bold text-orange-600 block mb-1 uppercase">Suku Kata ${info("Pemisahan suku kata turunan menggunakan titik. Contoh: ma.ma.kan.")}</label>
-                        <input class="tur-suku w-full p-2 border rounded text-sm" placeholder="Suku Kata" value="${data.sukukata||''}">
-                    </div>
-                </div>
-                
-                <label class="text-[10px] font-bold text-orange-600 block mb-1 uppercase">Definisi Turunan ${info("Arti spesifik dari kata yang sudah mendapatkan imbuhan tersebut.")}</label>
-                <input class="tur-def w-full p-2 border rounded mb-2 text-sm" placeholder="Definisi" value="${data.definisi_umum?.[0]?.definisi||''}">
-                
-                <label class="text-[10px] font-bold text-orange-600 block mb-1 uppercase">Kelas Kata ${info("Kelas kata untuk kata turunan ini (bisa berbeda dari kata utama).")}</label>
-                <select class="tur-kelas w-full p-2 border rounded mb-2 text-sm">${opsiKelasKata}</select>
-                
-                <label class="text-[10px] font-bold text-orange-600 block mb-1 uppercase">Contoh Kalimat Turunan ${info("Contoh penggunaan kata turunan dalam sebuah kalimat.")}</label>
-                <div class="grid grid-cols-2 gap-2">
-                    <input class="tur-ex-bjr w-full p-2 border rounded text-xs" placeholder="Cth Banjar" value="${data.definisi_umum?.[0]?.contoh?.[0]?.banjar||''}"><input class="tur-ex-idn w-full p-2 border rounded text-xs" placeholder="Cth Indo" value="${data.definisi_umum?.[0]?.contoh?.[0]?.indonesia||''}">
-                </div>`;
-            if(data.definisi_umum?.[0]?.kelaskata) div.querySelector('.tur-kelas').value = data.definisi_umum[0].kelaskata;
-            c.appendChild(div);
+        window.addPoinPanduan = () => { syncPanduanInputToArray(); window.panduanList.push({ judul_poin: "", foto_url: "", isi_penjelasan: "" }); renderPanduanList(); };
+        window.removePoinPanduan = (idx) => { syncPanduanInputToArray(); window.panduanList.splice(idx, 1); renderPanduanList(); };
+        window.movePoin = (idx, dir) => { syncPanduanInputToArray(); if((dir===-1 && idx>0) || (dir===1 && idx<window.panduanList.length-1)) { [window.panduanList[idx], window.panduanList[idx+dir]] = [window.panduanList[idx+dir], window.panduanList[idx]]; renderPanduanList(); } };
+        
+        function syncPanduanInputToArray() {
+            document.querySelectorAll('.panduan-item').forEach((item, idx) => {
+                if (window.panduanList[idx]) {
+                    window.panduanList[idx].judul_poin = item.querySelector('.t').value;
+                    window.panduanList[idx].foto_url = item.querySelector('.f').value;
+                    window.panduanList[idx].isi_penjelasan = item.querySelector('.d').value;
+                }
+            });
+        }
+        function renderPanduanList() {
+            const c = document.getElementById('list-poin-container'); c.innerHTML = '';
+            window.panduanList.forEach((p,i)=>{ 
+                c.innerHTML+=`<div class="panduan-item bg-purple-50 p-3 mb-3 border border-purple-200 rounded relative"><div class="flex justify-between items-center mb-2"><span class="text-xs font-bold bg-purple-600 text-white px-2 py-1 rounded">Langkah ${i+1}</span><div><button onclick="movePoin(${i},-1)" class="bg-gray-200 px-2 py-1 rounded text-xs mr-1 hover:bg-gray-300">⬆</button><button onclick="movePoin(${i},1)" class="bg-gray-200 px-2 py-1 rounded text-xs mr-2 hover:bg-gray-300">⬇</button><button onclick="removePoinPanduan(${i})" class="text-red-500 text-xs font-bold hover:text-red-700">Hapus</button></div></div><div class="mb-2"><label class="text-[10px] font-bold text-purple-700 uppercase">Judul Langkah</label><input class="t w-full border p-2 rounded text-sm font-bold" value="${p.judul_poin||''}"></div><div class="mb-2"><label class="text-[10px] font-bold text-purple-700 uppercase">Foto URL</label><div class="flex gap-2"><input class="f w-full border p-2 rounded text-xs" value="${p.foto_url||''}"><button onclick="window.open('https://drive.google.com/drive/u/0/my-drive')" class="bg-purple-500 text-white px-2 rounded text-[10px] whitespace-nowrap">Open Drive</button></div></div><div><label class="text-[10px] font-bold text-purple-700 uppercase">Penjelasan</label><textarea class="d w-full border p-2 rounded text-sm h-16">${p.isi_penjelasan||''}</textarea></div></div>`;
+            });
         }
 
-        window.checkExistingWord = async (val) => {
-            if (!currentTab.includes('kamus') || val.length < 1) return;
-            const docSnap = await getDoc(doc(db, "kamus_banjar_indonesia", val.trim().toLowerCase()));
-            if (docSnap.exists()) {
-                document.getElementById('statusCheck').classList.remove('hidden');
-                document.getElementById('statusCheck').innerText = "⚠️ Kata sudah ada di database! Mengalihkan ke mode Edit.";
-                editItem(docSnap.id, docSnap.data());
-            }else{
-                document.getElementById('statusCheck').classList.add('hidden');
-                resetKamusInputsOnly()
-            }
+        // --- CHART SIDE-BY-SIDE ---
+        window.renderAbjadChart = async () => {
+            try {
+                let data = await fetchGitHubFile('kamus_data');
+                if (!Array.isArray(data) && data.UTAMA) data = data.UTAMA; else if (!Array.isArray(data)) data = [];
+                const alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""); const countsUtama = {}; const countsTurunan = {}; let totalUtama = 0; let totalTurunan = 0;
+                alfabet.forEach(h => { countsUtama[h] = 0; countsTurunan[h] = 0; });
+                data.forEach(d => {
+                    const kataUtama = d.kata || d.KATA || "";
+                    if (kataUtama) { totalUtama++; const char = kataUtama.charAt(0).toUpperCase(); if (countsUtama[char] !== undefined) countsUtama[char]++;
+                        if (d.turunan && Array.isArray(d.turunan)) { const jml = d.turunan.length; totalTurunan += jml; if (countsTurunan[char] !== undefined) countsTurunan[char] += jml; }
+                    }
+                });
+                const totalGabungan = totalUtama + totalTurunan;
+                const statContainer = document.getElementById('statistikContainer');
+                if(statContainer) {
+                    statContainer.innerHTML = `<div class="bg-white border border-gray-200 rounded-xl shadow-sm p-6 mb-6 text-center"><div class="mb-6 pb-6 border-b border-dashed border-gray-200"><p class="text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-2">Total Kata</p><h1 class="text-6xl font-black text-gray-800">${totalGabungan.toLocaleString()}</h1></div><div class="flex justify-around items-center max-w-md mx-auto"><div class="flex flex-col"><span class="text-3xl font-black text-green-600">${totalUtama.toLocaleString()}</span><span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Utama</span></div><div class="h-10 w-[2px] bg-gray-100"></div><div class="flex flex-col"><span class="text-3xl font-black text-orange-500">${totalTurunan.toLocaleString()}</span><span class="text-[10px] font-bold text-gray-500 uppercase tracking-wider">Turunan</span></div></div></div><div class="bg-white border border-gray-200 rounded-xl shadow-sm p-4"><div class="flex justify-between items-center mb-4"><h3 class="text-sm font-bold text-gray-700 uppercase">Distribusi Abjad (Side-by-Side)</h3><button onclick="exportKamusToExcel(event)" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-bold text-xs flex items-center gap-2"><i class="fas fa-file-excel"></i> Excel</button></div><div class="h-[300px] w-full"><canvas id="chartAbjad"></canvas></div></div>`;
+                }
+                const ctx = document.getElementById('chartAbjad');
+                if (ctx) {
+                    if (window.myChart instanceof Chart) window.myChart.destroy();
+                    window.myChart = new Chart(ctx, { 
+                        type: 'bar', 
+                        data: { 
+                            labels: alfabet, 
+                            datasets: [
+                                { label: 'Utama', data: alfabet.map(h => countsUtama[h]), backgroundColor: '#16a34a' }, 
+                                { label: 'Turunan', data: alfabet.map(h => countsTurunan[h]), backgroundColor: '#f97316' }
+                            ] 
+                        }, 
+                        options: { 
+                            responsive: true, 
+                            maintainAspectRatio: false, 
+                            scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } // Removed 'stacked' props
+                        } 
+                    });
+                }
+            } catch (e) { console.error(e); }
         };
-        window.editItem = (id, data) => { document.getElementById('editId').value = id; fillFormWithData(id, data); document.getElementById('btnSave').innerText = "UPDATE DATA"; window.scrollTo({ top: 0, behavior: 'smooth' }); };
-        window.hapusItem = async (id) => { if (confirm("Yakin hapus data ini?")) await deleteDoc(doc(db, currentTab, id)); };
-        window.resetForm = () => { 
-            document.getElementById('editId').value = ''; document.getElementById('btnSave').innerText = "SIMPAN DATA"; 
-            document.getElementById('statusCheck').classList.add('hidden');
-            window.tempRecId = null; window.panduanList = []; renderFormInputs(); 
-        };
-        function resetKamusInputsOnly() {
-            const sukuKataInp = document.getElementById('sukukata');
-            if (sukuKataInp) sukuKataInp.value = '';
-            
-            const defList = document.getElementById('def-list');
-            if (defList) {
-                defList.innerHTML = '';
-                tambahDefinisiDOM(); 
-            }
-            
-            const turList = document.getElementById('tur-list');
-            if (turList) turList.innerHTML = '';
+
+        window.exportKamusToExcel = async (e) => {
+            const btn = e.currentTarget; btn.innerText = "...";
+            try {
+                const data = await fetchGitHubFile('kamus_data'); const rows = [];
+                (Array.isArray(data) ? data : data.UTAMA || []).forEach(d => { rows.push({ Tipe: "Utama", Kata: d.kata, SukuKata: d.sukukata, Definisi: d.definisi_umum?.[0]?.definisi }); if(d.turunan) { d.turunan.forEach(t => { rows.push({ Tipe: "Turunan dari " + d.kata, Kata: t.kata, SukuKata: t.sukukata, Definisi: t.definisi_umum?.[0]?.definisi }); }); } });
+                const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(rows), "Kamus"); XLSX.writeFile(wb, "Kamus_Backup.xlsx");
+            } catch (err) { alert(err.message); } btn.innerHTML = `<i class="fas fa-file-excel"></i> Excel`;
         }
-        window.fillFormWithData = (id, data) => {
-            if(currentTab === 'panduan') { document.getElementById('judul').value = data.judul || ''; window.panduanList = data.langkah_langkah || []; renderPanduanList(); } 
-            else if(currentTab.includes('kamus') || currentTab === 'rekomendasi_kata') {
-                document.getElementById('kata').value = data.kata || ''; document.getElementById('sukukata').value = data.sukukata || '';
-                document.getElementById('def-list').innerHTML = ""; document.getElementById('tur-list').innerHTML = "";
-                (data.definisi_umum || []).forEach(d => tambahDefinisiDOM(d));
-                (data.turunan || []).forEach(t => tambahTurunanDOM(t));
-            } else { for (let key in data) if(document.getElementById(key)) document.getElementById(key).value = data[key]; }
-        };
-        window.tinjauRekomendasi = (recId, data) => { window.tempRecId = recId; tempReviewCollection = currentTab; switchTab(currentTab === 'rekomendasi_dialek' ? 'dialek' : 'kamus_banjar_indonesia'); fillFormWithData('', data); document.getElementById('btnSave').innerText = "PUBLIKASI"; };
+
+        function showNotification(msg) { const div = document.createElement('div'); div.className = "fixed top-5 right-5 bg-green-600 text-white px-6 py-3 rounded shadow-xl z-50"; div.innerText = msg; document.body.appendChild(div); setTimeout(() => div.remove(), 3000); }
     </script>
 </body>
 </html>
