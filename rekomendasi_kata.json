@@ -48,5 +48,30 @@
       ],
       "turunan": []
     }
+  },
+  {
+    "id": "1768095754761",
+    "nama_pengirim": "yuyun@gmail.com",
+    "tanggal": "2026-01-11T01:42:34.761Z",
+    "status": "Pending",
+    "saran_kata": "yuuu",
+    "saran_dialek": null,
+    "detail_lengkap": {
+      "kata": "yuuu",
+      "sukukata": "we",
+      "definisi_umum": [
+        {
+          "definisi": "aervwe",
+          "kelaskata": "",
+          "contoh": [
+            {
+              "banjar": "",
+              "indonesia": ""
+            }
+          ]
+        }
+      ],
+      "turunan": []
+    }
   }
 ]
