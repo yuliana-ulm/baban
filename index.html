@@ -53,8 +53,7 @@
             </div>
         </div>
 
-        <div id="statistikContainer" class="hidden mb-8">
-            </div>
+        <div id="statistikContainer" class="hidden mb-8"></div>
 
         <div id="formContainer" class="bg-gray-50 p-4 md:p-6 rounded-lg mb-8 border-2 border-dashed border-gray-300">
             <div class="flex justify-between items-center mb-4 border-b pb-2">
@@ -62,7 +61,6 @@
             </div>
             
             <input type="hidden" id="editIndex"> 
-            
             <div id="inputs" class="grid grid-cols-1 gap-4"></div>
 
             <div id="panduan-dynamic-area" class="hidden mt-4">
@@ -102,11 +100,10 @@
         const REPO_OWNER = "yuliana-ulm"; 
         const REPO_NAME = "baban"; 
         const BRANCH = "main"; 
-        // ==========================================
 
         let currentTab = '';
         let currentUser = null; 
-        let currentFileSha = null; 
+        let currentFileSha = null; // Variabel Global SHA (Hanya untuk load biasa)
         let currentDataCache = []; 
         window.panduanList = []; 
         let myChart = null;
@@ -121,18 +118,22 @@
             btn.innerText = "Memverifikasi..."; btn.disabled = true;
 
             try {
-                const users = await fetchGitHubFile('users');
+                // Fetch user data
+                const users = await fetchGitHubFile('users'); 
+                if(!users) throw new Error("File users.json tidak ditemukan!");
+
                 let userList = Array.isArray(users) ? users : [users];
                 const user = userList.find(u => u.email === email && u.password === pass);
+                
                 if (user) {
                     currentUser = user;
                     sessionStorage.setItem("admin_kamus_user", JSON.stringify(currentUser));
                     initAdminPanel();
                 } else {
-                    alert("Gagal Login! Cek email/password.");
+                    alert("Gagal Login! Email atau password salah.");
                 }
             } catch (e) {
-                alert("Error Koneksi: " + e.message);
+                alert("Error Login: " + e.message + "\nPastikan file users.json sudah dibuat di GitHub.");
                 console.error(e);
             } finally {
                 btn.innerText = "MASUK"; btn.disabled = false;
@@ -148,12 +149,8 @@
             document.getElementById('roleBadge').innerText = currentUser.role;
 
             const role = currentUser.role;
-            document.getElementById('tab-users').classList.add('hidden');
-            document.getElementById('tab-dialek').classList.add('hidden');
-            document.getElementById('tab-kamus_data').classList.add('hidden');
-            document.getElementById('tab-panduan').classList.add('hidden');
-            document.getElementById('tab-statistik').classList.add('hidden');
-            document.getElementById('group-rekomendasi').classList.add('hidden');
+            // Hide all tabs initially
+            ['tab-users', 'tab-dialek', 'tab-kamus_data', 'tab-panduan', 'tab-statistik', 'group-rekomendasi'].forEach(id => document.getElementById(id).classList.add('hidden'));
 
             if (role === 'Admin Utama') {
                 document.getElementById('tab-users').classList.remove('hidden');
@@ -174,26 +171,56 @@
         const savedUser = sessionStorage.getItem("admin_kamus_user");
         if (savedUser) { currentUser = JSON.parse(savedUser); initAdminPanel(); }
 
-        // --- API ---
+        // --- GITHUB API HELPERS ---
+        // Fungsi fetch ini mengupdate variable global currentFileSha
         async function fetchGitHubFile(filename) {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}.json?ref=${BRANCH}&t=${Date.now()}`;
             const response = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } });
-            if (!response.ok) throw new Error(`File ${filename}.json tidak ditemukan.`);
+            
+            if (!response.ok) {
+                if(response.status === 404) return null; // Return null if not found
+                throw new Error(`Gagal mengambil ${filename}.json`);
+            }
+            
             const data = await response.json();
-            currentFileSha = data.sha; 
+            currentFileSha = data.sha; // Update global SHA
             const content = decodeURIComponent(escape(atob(data.content)));
             return JSON.parse(content);
         }
 
-        async function saveToGitHub(filename, newDataArray) {
+        // Fungsi fetch KHUSUS untuk mengambil SHA dan Content sekaligus (Anti-Konflik)
+        async function fetchFileWithSha(filename) {
+            const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}.json?ref=${BRANCH}&t=${Date.now()}`;
+            const response = await fetch(url, { headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' } });
+            if (!response.ok) return { data: [], sha: null };
+            
+            const jsonRes = await response.json();
+            const content = decodeURIComponent(escape(atob(jsonRes.content)));
+            return { data: JSON.parse(content), sha: jsonRes.sha };
+        }
+
+        // Fungsi Save dengan opsi SHA manual
+        async function saveToGitHub(filename, newDataArray, explicitSha = null) {
             const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${filename}.json?ref=${BRANCH}&t=${Date.now()}`;
             const contentString = JSON.stringify(newDataArray, null, 2);
             const contentBase64 = btoa(unescape(encodeURIComponent(contentString)));
-            const body = { message: `Update ${filename}`, content: contentBase64, branch: BRANCH, sha: currentFileSha };
+            
+            // Gunakan explicitSha jika ada, kalau tidak pakai global currentFileSha
+            const shaToUse = explicitSha || currentFileSha;
+
+            const body = { message: `Update ${filename}`, content: contentBase64, branch: BRANCH, sha: shaToUse };
+            
+            // Jika file baru (sha null), jangan kirim property sha
+            if(!shaToUse) delete body.sha;
+
             const response = await fetch(url, { method: 'PUT', headers: { 'Authorization': `token ${GITHUB_TOKEN}`, 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
-            if (!response.ok) { const err = await response.json(); throw new Error(err.message); }
+            
+            if (!response.ok) { 
+                const err = await response.json(); 
+                throw new Error(err.message); 
+            }
             const resJson = await response.json();
-            currentFileSha = resJson.content.sha; 
+            currentFileSha = resJson.content.sha; // Update global agar sinkron
         }
 
         // --- NAV ---
@@ -241,27 +268,32 @@
             try {
                 let rawData = await fetchGitHubFile(currentTab);
                 
-                if (currentTab === 'kamus_data' && !Array.isArray(rawData) && rawData.UTAMA) {
-                    let newData = [];
-                    rawData.UTAMA.forEach(u => {
-                        let wordObj = {
-                            kata: u.KATA || u.kata,
-                            sukukata: u['SUKU KATA'] || u.sukukata,
-                            definisi_umum: [{ definisi: u.DEFINISI || u.definisi, kelaskata: u['KELAS KATA'] || u.kelaskata, contoh: [{ banjar: u['CONTOH BANJAR'], indonesia: u['CONTOH INDO'] }] }],
-                            turunan: []
-                        };
-                        let turunanKey = `TURUNAN DARI: ${wordObj.kata}`;
-                        if (rawData[turunanKey]) {
-                            wordObj.turunan = rawData[turunanKey].map(t => ({
-                                kata: t.KATA, sukukata: t['SUKU KATA'],
-                                definisi_umum: [{ definisi: t.DEFINISI, kelaskata: t['KELAS KATA'], contoh: [{ banjar: t['CONTOH BANJAR'], indonesia: t['CONTOH INDO'] }] }]
-                            }));
-                        }
-                        newData.push(wordObj);
-                    });
-                    currentDataCache = newData;
+                // Handle file kosong/null
+                if(!rawData) {
+                    currentDataCache = [];
                 } else {
-                    currentDataCache = Array.isArray(rawData) ? rawData : [];
+                    if (currentTab === 'kamus_data' && !Array.isArray(rawData) && rawData.UTAMA) {
+                        let newData = [];
+                        rawData.UTAMA.forEach(u => {
+                            let wordObj = {
+                                kata: u.KATA || u.kata,
+                                sukukata: u['SUKU KATA'] || u.sukukata,
+                                definisi_umum: [{ definisi: u.DEFINISI || u.definisi, kelaskata: u['KELAS KATA'] || u.kelaskata, contoh: [{ banjar: u['CONTOH BANJAR'], indonesia: u['CONTOH INDO'] }] }],
+                                turunan: []
+                            };
+                            let turunanKey = `TURUNAN DARI: ${wordObj.kata}`;
+                            if (rawData[turunanKey]) {
+                                wordObj.turunan = rawData[turunanKey].map(t => ({
+                                    kata: t.KATA, sukukata: t['SUKU KATA'],
+                                    definisi_umum: [{ definisi: t.DEFINISI, kelaskata: t['KELAS KATA'], contoh: [{ banjar: t['CONTOH BANJAR'], indonesia: t['CONTOH INDO'] }] }]
+                                }));
+                            }
+                            newData.push(wordObj);
+                        });
+                        currentDataCache = newData;
+                    } else {
+                        currentDataCache = Array.isArray(rawData) ? rawData : [];
+                    }
                 }
 
                 if (currentTab === 'dialek') header.innerHTML = `<th class="p-3">Indo</th><th>Hulu</th><th>Kuala</th><th>Aksi</th>`;
@@ -371,19 +403,36 @@
             if(!confirm("Yakin data sudah benar dan ingin mempublikasikannya ke Kamus Utama?")) return;
             const btn = document.getElementById('btnPublish');
             btn.innerText = "Publishing..."; btn.disabled = true;
+
             try {
                 const finalFormData = getFormDataFromInputs();
                 const targetMainFile = currentTab === 'rekomendasi_kata' ? 'kamus_data' : 'dialek';
-                let mainData = await fetchGitHubFile(targetMainFile);
-                if (!Array.isArray(mainData)) mainData = mainData.UTAMA || [];
+
+                // 1. Fetch & Save MAIN FILE (Using Explicit SHA)
+                let mainFileObj = await fetchFileWithSha(targetMainFile);
+                let mainData = Array.isArray(mainFileObj.data) ? mainFileObj.data : (mainFileObj.data.UTAMA || []);
+                let mainSha = mainFileObj.sha;
+
                 if(targetMainFile === 'kamus_data') {
                     const exists = mainData.some(d => (d.kata || d.KATA).toLowerCase() === finalFormData.kata.toLowerCase());
                     if(exists && !confirm(`Kata "${finalFormData.kata}" sudah ada di Kamus Utama. Timpa/Duplikat?`)) { btn.innerText = "PUBLISH SEKARANG"; btn.disabled = false; return; }
                 }
                 mainData.push(finalFormData);
-                await saveToGitHub(targetMainFile, mainData);
-                let recData = await fetchGitHubFile(currentTab); 
-                if (Array.isArray(recData)) { recData.splice(window.tempRecId, 1); await saveToGitHub(currentTab, recData); }
+                
+                // Gunakan SHA yang baru didapat dari fetchFileWithSha
+                await saveToGitHub(targetMainFile, mainData, mainSha);
+
+                // 2. Fetch & Save REC FILE (Using Explicit SHA)
+                let recFileObj = await fetchFileWithSha(currentTab);
+                let recData = recFileObj.data;
+                let recSha = recFileObj.sha;
+
+                if (Array.isArray(recData)) {
+                    recData.splice(window.tempRecId, 1);
+                    // Gunakan SHA dari fetchFileWithSha
+                    await saveToGitHub(currentTab, recData, recSha);
+                }
+
                 alert("🎉 SUKSES! Data terbit di Kamus Utama.");
                 resetForm(); loadData();
             } catch (e) { console.error(e); alert("Gagal Publish: " + e.message); } finally { btn.innerText = "PUBLISH SEKARANG"; btn.disabled = false; }
@@ -513,7 +562,6 @@
             window.tempRecId = null; window.panduanList = []; renderFormInputs();
         };
 
-        // --- 11 PILIHAN KELAS KATA ---
         const opsiKelasKata = `
             <option value="">- Pilih Kelas Kata -</option>
             <option value="Verba">Verba (Kata Kerja)</option>
@@ -556,11 +604,10 @@
         function renderPanduanList() {
             const c = document.getElementById('list-poin-container'); c.innerHTML = '';
             window.panduanList.forEach((p,i)=>{ 
-                c.innerHTML+=`<div class="panduan-item bg-purple-50 p-3 mb-3 border border-purple-200 rounded relative"><div class="flex justify-between items-center mb-2"><span class="text-xs font-bold bg-purple-600 text-white px-2 py-1 rounded">Langkah ${i+1}</span><div><button onclick="movePoin(${i},-1)" class="bg-gray-200 px-2 py-1 rounded text-xs mr-1 hover:bg-gray-300">⬆</button><button onclick="movePoin(${i},1)" class="bg-gray-200 px-2 py-1 rounded text-xs mr-2 hover:bg-gray-300">⬇</button><button onclick="removePoinPanduan(${i})" class="text-red-500 text-xs font-bold hover:text-red-700">Hapus</button></div></div><div class="mb-2"><label class="text-[10px] font-bold text-purple-700 uppercase">Judul Langkah</label><input class="t w-full border p-2 rounded text-sm font-bold" value="${p.judul_poin||''}"></div><div class="mb-2"><label class="text-[10px] font-bold text-purple-700 uppercase">Foto URL</label><div class="flex gap-2"><input class="f w-full border p-2 rounded text-xs" value="${p.foto_url||''}"><button onclick="window.open('https://drive.google.com/drive/u/0/my-drive')" class="bg-purple-500 text-white px-2 rounded text-[10px] whitespace-nowrap">Open Drive</button></div></div><div><label class="text-[10px] font-bold text-purple-700 uppercase">Penjelasan</label><textarea class="d w-full border p-2 rounded text-sm h-16">${p.isi_penjelasan||''}</textarea></div></div>`;
+                c.innerHTML+=`<div class="panduan-item bg-purple-50 p-3 mb-3 border border-purple-200 rounded relative"><div class="flex justify-between items-center mb-2"><span class="text-xs font-bold bg-purple-600 text-white px-2 py-1 rounded">Langkah ${i+1}</span><div><button onclick="movePoin(${i},-1)" class="bg-gray-200 px-2 py-1 rounded text-xs mr-1 hover:bg-gray-300">⬆</button><button onclick="movePoin(${i},1)" class="bg-gray-200 px-2 py-1 rounded text-xs mr-2 hover:bg-gray-300">⬇</button><button onclick="removePoinPanduan(${i})" class="text-red-500 text-xs font-bold hover:text-red-700">Hapus</button></div></div><div class="mb-2"><label class="text-[10px] font-bold text-purple-700 uppercase">Judul Langkah</label><input class="t w-full border p-2 rounded text-sm font-bold" value="${p.judul_poin||''}"></div><div class="mb-2"><label class="text-[10px] font-bold text-purple-700 uppercase">Foto URL</label><div class="flex gap-2"><input class="f w-full border p-2 rounded text-xs" value="${p.foto_url||''}"><button onclick="window.open('https://drive.google.com/drive/u/0/my-drive', '_blank')" class="bg-purple-500 text-white px-2 rounded text-[10px] whitespace-nowrap">Buka Drive</button></div></div><div><label class="text-[10px] font-bold text-purple-700 uppercase">Penjelasan</label><textarea class="d w-full border p-2 rounded text-sm h-16">${p.isi_penjelasan||''}</textarea></div></div>`;
             });
         }
 
-        // --- CHART SIDE-BY-SIDE ---
         window.renderAbjadChart = async () => {
             try {
                 let data = await fetchGitHubFile('kamus_data');
@@ -593,7 +640,7 @@
                         options: { 
                             responsive: true, 
                             maintainAspectRatio: false, 
-                            scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } // Removed 'stacked' props
+                            scales: { x: { grid: { display: false } }, y: { beginAtZero: true } } // Side-by-side mode (no stacked props)
                         } 
                     });
                 }
@@ -613,4 +660,3 @@
     </script>
 </body>
 </html>
-
