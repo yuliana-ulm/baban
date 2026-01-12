@@ -36662,12 +36662,16 @@
   },
   {
     "kata": "ulu",
+    "sukukata": "u.lu",
     "definisi_umum": [
       {
         "definisi": "olok",
-        "kelaskata": "n",
+        "kelaskata": "Adjektiva",
         "contoh": [
-          {}
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
         ]
       }
     ],
@@ -36678,7 +36682,7 @@
         "definisi_umum": [
           {
             "definisi": "mengolok-olok",
-            "kelaskata": "v",
+            "kelaskata": "",
             "contoh": [
               {
                 "banjar": "jangan katuju maulu-ulu",
