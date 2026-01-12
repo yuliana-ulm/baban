@@ -36713,12 +36713,16 @@
   },
   {
     "kata": "ulur",
+    "sukukata": "u.lur",
     "definisi_umum": [
       {
         "definisi": "ulur; turunkan",
-        "kelaskata": "v",
+        "kelaskata": "Adverbia",
         "contoh": [
-          {}
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
         ]
       }
     ],
@@ -36729,7 +36733,7 @@
         "definisi_umum": [
           {
             "definisi": "sudah diulur",
-            "kelaskata": "adv",
+            "kelaskata": "",
             "contoh": [
               {
                 "banjar": "",
@@ -36745,7 +36749,7 @@
         "definisi_umum": [
           {
             "definisi": "terjulur",
-            "kelaskata": "v",
+            "kelaskata": "",
             "contoh": [
               {
                 "banjar": "",
@@ -36761,7 +36765,7 @@
         "definisi_umum": [
           {
             "definisi": "mengulur ",
-            "kelaskata": "v",
+            "kelaskata": "",
             "contoh": [
               {
                 "banjar": "",
