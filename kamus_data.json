@@ -1,19 +1,30 @@
-[{  "kata": "abad",
+[
+  {
+    "kata": "abad",
     "sukukata": "a.bad",
     "definisi_umum": [
-      { "definisi": "abad",
+      {
+        "definisi": "abad",
         "kelaskata": "Nomina",
-        "contoh": [{
+        "contoh": [
+          {
             "banjar": "sudah saabad umur niniku",
             "indonesia": "sudah seabad umur nenekku"
-          }]}],
-    "turunan": []},
- {  "kata": "abadan",
+          }
+        ]
+      }
+    ],
+    "turunan": []
+  },
+  {
+    "kata": "abadan",
     "sukukata": "a.ba.dan",
     "definisi_umum": [
-      { "definisi": "terbiasa, pembawaan, kebiasaan",
+      {
+        "definisi": "terbiasa, pembawaan, kebiasaan",
         "kelaskata": "Adjektiva",
-        "contoh": [{
+        "contoh": [
+          {
             "banjar": "jangan bajajumput bat urang, jadi abadan kena",
             "indonesia": "jangan mengambil kepunyaan orang, jadi terbiasa nanti"
           }
@@ -3377,11 +3388,16 @@
   },
   {
     "kata": "anak",
+    "sukukata": "a.nak",
     "definisi_umum": [
       {
         "definisi": "anak",
+        "kelaskata": "",
         "contoh": [
-          {}
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
         ]
       }
     ],
