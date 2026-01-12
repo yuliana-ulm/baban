@@ -16125,11 +16125,16 @@
   },
   {
     "kata": "bulu",
+    "sukukata": "bu.lu",
     "definisi_umum": [
       {
         "definisi": "bulu",
+        "kelaskata": "Nomina",
         "contoh": [
-          {}
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
         ]
       }
     ],
