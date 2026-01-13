@@ -30640,9 +30640,11 @@
   },
   {
     "kata": "labang",
+    "sukukata": "la.bang",
     "definisi_umum": [
       {
-        "definisi": "v cak jemur (tentang padi):",
+        "definisi": "cak jemur (tentang padi):",
+        "kelaskata": "Verba",
         "contoh": [
           {
             "banjar": "labang banih wayahini tampulu harinya panas,",
@@ -30654,11 +30656,11 @@
     "turunan": [
       {
         "kata": "balabang",
-        "sukukata": "",
+        "sukukata": "ba.la.bang",
         "definisi_umum": [
           {
-            "definisi": "v sudah dijemur (tentang padi):",
-            "kelaskata": "",
+            "definisi": "sudah dijemur (tentang padi):",
+            "kelaskata": "Verba",
             "contoh": [
               {
                 "banjar": "banih balabang dibuat kada dalam karung",
@@ -30670,11 +30672,11 @@
       },
       {
         "kata": "malabang",
-        "sukukata": "",
+        "sukukata": "ma.la.bang",
         "definisi_umum": [
           {
-            "definisi": "v menjemur padi",
-            "kelaskata": "",
+            "definisi": "menjemur padi",
+            "kelaskata": "Verba",
             "contoh": [
               {
                 "banjar": "abah malabang banih",
