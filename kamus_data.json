@@ -1,5 +1,22 @@
 [
   {
+    "kata": "kentong",
+    "sukukata": "ke.ntong",
+    "definisi_umum": [
+      {
+        "definisi": "(BK) saku, kantong",
+        "kelaskata": "Nomina",
+        "contoh": [
+          {
+            "banjar": "kentong salawar ",
+            "indonesia": "saku celana"
+          }
+        ]
+      }
+    ],
+    "turunan": []
+  },
+  {
     "kata": "kencang",
     "sukukata": "ke.n.cang",
     "definisi_umum": [
