@@ -1,5 +1,55 @@
 [
   {
+    "kata": "kilar",
+    "sukukata": "",
+    "definisi_umum": [
+      {
+        "definisi": "lirik",
+        "kelaskata": "",
+        "contoh": [
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
+        ]
+      }
+    ],
+    "turunan": [
+      {
+        "kata": "mangilar",
+        "sukukata": "",
+        "definisi_umum": [
+          {
+            "definisi": "melirik",
+            "kelaskata": "",
+            "contoh": [
+              {
+                "banjar": "",
+                "indonesia": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kata": "sakilaran",
+        "sukukata": "",
+        "definisi_umum": [
+          {
+            "definisi": "sekali melirik",
+            "kelaskata": "",
+            "contoh": [
+              {
+                "banjar": "",
+                "indonesia": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "kata": "kilap",
     "sukukata": "",
     "definisi_umum": [
