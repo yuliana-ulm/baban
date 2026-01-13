@@ -1,5 +1,39 @@
 [
   {
+    "kata": "kiau",
+    "sukukata": "",
+    "definisi_umum": [
+      {
+        "definisi": "panggil",
+        "kelaskata": "",
+        "contoh": [
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
+        ]
+      }
+    ],
+    "turunan": [
+      {
+        "kata": "bakiau",
+        "sukukata": "",
+        "definisi_umum": [
+          {
+            "definisi": "memanggil",
+            "kelaskata": "",
+            "contoh": [
+              {
+                "banjar": "",
+                "indonesia": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "kata": "kias",
     "sukukata": "",
     "definisi_umum": [
