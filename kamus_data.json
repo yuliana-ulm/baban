@@ -1,5 +1,71 @@
 [
   {
+    "kata": "kencang",
+    "sukukata": "ke.n.cang",
+    "definisi_umum": [
+      {
+        "definisi": "kencang",
+        "kelaskata": "Adjektiva",
+        "contoh": [
+          {
+            "banjar": "cuba tarik yang kencang",
+            "indonesia": "coba tarik yang kencang"
+          }
+        ]
+      }
+    ],
+    "turunan": [
+      {
+        "kata": "bekencang",
+        "sukukata": "be.kencang",
+        "definisi_umum": [
+          {
+            "definisi": "tambah kencang, dalam keadaan kencang",
+            "kelaskata": "Adjektiva",
+            "contoh": [
+              {
+                "banjar": "",
+                "indonesia": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kata": "bakakencangan",
+        "sukukata": "baka.kencangan",
+        "definisi_umum": [
+          {
+            "definisi": "saling mengencang, menarik urat leher",
+            "kelaskata": "Verba",
+            "contoh": [
+              {
+                "banjar": "",
+                "indonesia": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "kata": "mangancang",
+        "sukukata": "ma.ngan.cang",
+        "definisi_umum": [
+          {
+            "definisi": "mengencang",
+            "kelaskata": "Adjektiva",
+            "contoh": [
+              {
+                "banjar": "",
+                "indonesia": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "kata": "abad",
     "sukukata": "a.bad",
     "definisi_umum": [
