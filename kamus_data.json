@@ -1,5 +1,39 @@
 [
   {
+    "kata": "kidam",
+    "sukukata": "",
+    "definisi_umum": [
+      {
+        "definisi": "ngidam",
+        "kelaskata": "",
+        "contoh": [
+          {
+            "banjar": "",
+            "indonesia": ""
+          }
+        ]
+      }
+    ],
+    "turunan": [
+      {
+        "kata": "mangidam",
+        "sukukata": "",
+        "definisi_umum": [
+          {
+            "definisi": "mengidam",
+            "kelaskata": "",
+            "contoh": [
+              {
+                "banjar": "",
+                "indonesia": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
     "kata": "kicuh",
     "sukukata": "",
     "definisi_umum": [
