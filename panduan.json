@@ -6,11 +6,6 @@
         "judul_poin": "Pada Pencarian Halaman Kamus",
         "foto_url": "https://drive.google.com/file/d/1v6Unc0BCm9BX8mu7Ji0hE2xdXXgjtKzP/view?usp=drive_link",
         "isi_penjelasan": "Ketika kamu mengetikkan kata yang tidak terdapat pada database kamus, maka akan muncul rekomendasi sebagai gambar diatas yang merupakan kosakata dengan tingkat jarak typo paling sedikit, namun jika yang kamu ketikkan sangat berbeda dari database maka akan muncul peringatan \"kata tidak ditemukan\""
-      },
-      {
-        "judul_poin": "",
-        "foto_url": "",
-        "isi_penjelasan": ""
       }
     ]
   },
