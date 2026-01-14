@@ -1,5 +1,20 @@
 [
   {
+    "judul": "Menggunakan Fitur Voice",
+    "langkah_langkah": [
+      {
+        "judul_poin": "Halaman Pencarian Kata ",
+        "foto_url": "https://drive.google.com/file/d/1VdZjhHwLfgmn6uBwnYFnsS46XxfDhlb8/view?usp=drive_link",
+        "isi_penjelasan": "Untuk menggunakan fitur voice, kamu cukup menekan tombol mic pada kolom pencarian, tombol tersebut berwarna merah dan berada dipaling kanan"
+      },
+      {
+        "judul_poin": "Berbicara lah",
+        "foto_url": "https://drive.google.com/file/d/16UEoY5kL-0tKk_mZVRQAlWcC0ZMfic5H/view?usp=drive_link",
+        "isi_penjelasan": "Masukkan suara mu untuk bisa diakses oleh fitur google voice, adapun ketentuannya yaitu internetmu lancar dan pastikan suaramu jernih atau tidak dalam berada dalam suasana ribut (suaramu terdengar jelas) agar bisa dideteksi ya"
+      }
+    ]
+  },
+  {
     "judul": "Mendengar Suara Dialek",
     "langkah_langkah": [
       {
