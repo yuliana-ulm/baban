@@ -75,22 +75,17 @@
     ]
   },
   {
-    "judul": "Mencari Kosa Kataa",
+    "judul": "Mencari Kosa Kata",
     "langkah_langkah": [
       {
-        "judul_poin": "Pencarian di menu Kamus",
-        "foto_url": "uwa",
-        "isi_penjelasan": "hall"
+        "judul_poin": "Pencarian pada Halaman Kamus",
+        "foto_url": "https://drive.google.com/file/d/1Y9j5iaXUGU5ABKKqKhJO9hqqrWQMfwpu/view?usp=drive_link",
+        "isi_penjelasan": "Jika kosa kata yang dicari sebagai diatas, maka data yang akan muncul pertama adalah kata yang mengandung inputan dari pengguna"
       },
       {
-        "judul_poin": "uiui",
-        "foto_url": "",
-        "isi_penjelasan": ""
-      },
-      {
-        "judul_poin": "op",
-        "foto_url": "",
-        "isi_penjelasan": ""
+        "judul_poin": "Hasil ",
+        "foto_url": "https://drive.google.com/file/d/1ARnVXmkGzT9r00NtWbZ9exMlu5k5ZrYQ/view?usp=drive_link",
+        "isi_penjelasan": "Berikut adalah hasil dari pencariannya, dimana ada beberapa list kosakata yang mengandung hasil dari pencarian kata \"ab\" tersebut"
       }
     ]
   }
