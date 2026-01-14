@@ -28,9 +28,19 @@
     "judul": "Mengubah Tema Gelap / Terang",
     "langkah_langkah": [
       {
-        "judul_poin": "f",
-        "foto_url": "",
-        "isi_penjelasan": ""
+        "judul_poin": "Masuk Halaman Menu",
+        "foto_url": "https://drive.google.com/file/d/1RiUjFcZpKub1-CSuhiq2qj-V4kAfUvwv/view?usp=drive_link",
+        "isi_penjelasan": "Pada halaman awal setelah spalshscreen, pilih halaman kamus yang terlihat paling berbeda dan berada dipaling bawah"
+      },
+      {
+        "judul_poin": "Ubah Posisi Toogle",
+        "foto_url": "https://drive.google.com/file/d/13BC5UG1958RIJhFAIWslnPJK0ldvNn4h/view?usp=drive_link",
+        "isi_penjelasan": "Lihat pada pojok kiri dibawah tombol menu, ada sebuah toogle yang bisa dipindah untuk mengatur tema gelap dan terangnya, untuk posisi defaultnya dia akan berada ke arah kiri, jika kamu ingin tema gelap tinggal kamu ubah posisinya menjadi disebelah kanan"
+      },
+      {
+        "judul_poin": "Hasil Perpindahan",
+        "foto_url": "https://drive.google.com/file/d/14dlHBL_GOKX_cjGmMuAXzlyPqbXL5tzD/view?usp=drive_link",
+        "isi_penjelasan": "Jika posisi toogle dipindah, maka hasilnya akan tampak seperti gambar diatas, dan untuk tema gelap ini akan mempengaruhi semua halaman mulai dari halaman tentang, panduan, dialek dan juga kamus. Jika ingin mengubah kembali temanya, cukup ubah posisinya lagi ya"
       }
     ]
   },
