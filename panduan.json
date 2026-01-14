@@ -1,5 +1,15 @@
 [
   {
+    "judul": "Mendengar Suara KosaKata",
+    "langkah_langkah": [
+      {
+        "judul_poin": "Pada Halaman Kamus",
+        "foto_url": "https://drive.google.com/file/d/1bvZON7Tmzw-X-e9ENfR_Gxuh-_uWEzqm/view?usp=drive_link",
+        "isi_penjelasan": "Terdapat gambar segitiga penuh, pengulangan dan tanda silang, tanda tersebut memiliki fungsi sebegai berikut:\n1) segitiga hijau, untuk memulai memutar suara untuk membacakan isi dari kosa kata tersebut\n2) tanda ulang, berguna untuk mengulang pengucapan dari fitur tts\n3) tanda silang, untuk menghentikan fitur tts dalam membacakan isi dari data kosakata"
+      }
+    ]
+  },
+  {
     "judul": "Menggunakan Fitur Voice",
     "langkah_langkah": [
       {
