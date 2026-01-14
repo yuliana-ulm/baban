@@ -48,14 +48,29 @@
     "judul": "Mencari Turunan Kata",
     "langkah_langkah": [
       {
-        "judul_poin": "oyaheee",
-        "foto_url": "",
-        "isi_penjelasan": "dgfs"
+        "judul_poin": "Halaman Menu",
+        "foto_url": "https://drive.google.com/file/d/1RiUjFcZpKub1-CSuhiq2qj-V4kAfUvwv/view?usp=drive_link",
+        "isi_penjelasan": "Pada halaman menu, pilih tombol kamus yang berada dipaling bawah untuk beralih ke halaman kamus guna mencari turunan kata"
       },
       {
-        "judul_poin": "dgdas",
-        "foto_url": "",
-        "isi_penjelasan": "df"
+        "judul_poin": "Halaman Kamus dan Fitur pencarian",
+        "foto_url": "https://drive.google.com/file/d/1VdZjhHwLfgmn6uBwnYFnsS46XxfDhlb8/view?usp=drive_link",
+        "isi_penjelasan": "Terdapat fitur voice dengan tombol mic berwarna merah yang memudahkan pengguna jika ingin mencari dengan menggunakan inputan suara kamu, adapun bisa juga diketik langsung pada form, disini tidak ada tombol cari karena sudah langsung algoritmanya mencari data berdasarkan string yang diinputkan pengguna yang langsung dicocokkan dengan database"
+      },
+      {
+        "judul_poin": "Kata Turunan",
+        "foto_url": "https://drive.google.com/file/d/1m8aUXCiYJdmWzH2mS6rH2Zmppi2baMmu/view?usp=drive_link",
+        "isi_penjelasan": "Jika mencari kata turunan, atau kata dasar yang sudah mengalami afiksasi, reduplikasi atau komposisi. maka bisa saja langsung ketikkan kosakatanya maka akan dicari pada database dengan mencocokkan kata nya dengan memisahnya menjadi kata dasar"
+      },
+      {
+        "judul_poin": "Hasil pencarian",
+        "foto_url": "https://drive.google.com/file/d/1fswXeEkBmPG1ln7E7UzIp4RfavP8y8oz/view?usp=drive_link",
+        "isi_penjelasan": "Terlihat saat pemecahan maka didapatkan kata dasar labang, yang mana untuk penjelasan detailnya bisa dengan klik tanda segitiga pada ujung kanan, arahkan tandanya ke bawah"
+      },
+      {
+        "judul_poin": "Hasil Turunan",
+        "foto_url": "https://drive.google.com/file/d/1zUKAm2FCEjOuLJ8Bu3ggYguSHNVT-i29/view?usp=drive_link",
+        "isi_penjelasan": "Berikut adalah hasilnya, dimana kata turunan ditemukan"
       }
     ]
   },
