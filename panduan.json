@@ -4,22 +4,22 @@
     "langkah_langkah": [
       {
         "judul_poin": "Masuk Halaman Menu ",
-        "foto_url": "https://drive.google.com/file/d/13IGZAk-pJzc6UWx0UFJs8QVuxxAFD8KS/view?usp=drive_link",
+        "foto_url": "https://drive.google.com/file/d/1I-37MGa7RMXeQqTvP4ydIVnPnmsGCPko/view?usp=drive_link",
         "isi_penjelasan": "Ini adalah halaman awal saat kamu membuka aplikasi kamus bahasa banjar, kemudian jika ingin mendengarkan suara dialek kamu harus masuk ke halaman dialek. Pada halaman menu ini klik Dialek Hulu dan Kuala agar bisa masuk ke halaman dialek."
       },
       {
         "judul_poin": "Masuk Halaman Dialek",
-        "foto_url": "https://drive.google.com/file/d/19Q9FQcrSkVvAO7uSMjou76mHP1czXl_T/view?usp=drive_link",
+        "foto_url": "https://drive.google.com/file/d/10mKZnyRM-ZYN9_jPip738x_nzSu4_Xxs/view?usp=drive_link",
         "isi_penjelasan": "Pada tampilan ini kalian bisa langsung melihat data kosa kata bahasa indonesia yang memiliki dialek bahasa banjar hulu ataupun kuala, perbedaan nya terletak pada beberapa hal yaitu: 1) perbedaan suku kata, 2) perbedaan cara pengucapan, 3) perbedaan makna"
       },
       {
         "judul_poin": "Pencarian Dialek",
-        "foto_url": "https://drive.google.com/file/d/19Q9FQcrSkVvAO7uSMjou76mHP1czXl_T/view?usp=drive_link",
+        "foto_url": "https://drive.google.com/file/d/10mKZnyRM-ZYN9_jPip738x_nzSu4_Xxs/view?usp=drive_link",
         "isi_penjelasan": "halaman ini juga menyediakan fitur pencarian jika ingin mencari kosa kata tersebut, namun kosa kata yang dicari adalah bahasa indonesia ya, karena dia akan menampilkan bahasa banjar hulu dan kuala dari bahasa indonesia yang kamu ketikkan. Perlu diketahui bahwa data yang ada didalam database saat ini masih terbatas untuk dialek, sehingga masih tidak terlalu banyak kata yang ada disini, mungkin kamu bisa mencari pembaruan kata di halaman kamus nantinya"
       },
       {
         "judul_poin": "Memutar audio",
-        "foto_url": "https://drive.google.com/file/d/19Q9FQcrSkVvAO7uSMjou76mHP1czXl_T/view?usp=drive_link",
+        "foto_url": "https://drive.google.com/file/d/10mKZnyRM-ZYN9_jPip738x_nzSu4_Xxs/view?usp=drive_link",
         "isi_penjelasan": "setelah mengetikkan kata, tentunya akan terlihat kosa kata yang dicari beserta dengan 3 ikon speaker dengan warna hijau, merah dan biru. Masing-masing tombol tersebut dapat ditekan yang mana hasilnya sebagai berikut:\n1) tombol speaker warna hijau akan membacakan kosakata, dialek hulu dan dialek kuala\n2) tombol speaker warna merah akan membacakan contoh penggunaan dialek hulu \n3) tombol speaker warna biru akan membacakan contoh penggunaan dialek kuala"
       }
     ]
